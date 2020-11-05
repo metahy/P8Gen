@@ -1,0 +1,12 @@
+A0541T160
+现券价格同步服务
+---
+PLDTP_BYBK_OFR_GRP				Group
+..MDL_DT	成交日期	102830		C
+..MDL_TM	成交时间	103549		C
+..TXN_VRTY_ECD	交易品种编码	120958		C
+..WAIR	加权平均利率	103563		N
+..LTST_INTRT	最新利率	103618		N
+..BYBK_TRM	回购期限	103348		N
+---
+StrUsInd	启用标志	128683	1	C
