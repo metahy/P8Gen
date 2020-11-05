@@ -1,5 +1,6 @@
 package com.tools.gen;
 
+import com.jfinal.template.Engine;
 import com.tools.gen.entity.P8TradeInfo;
 import com.tools.gen.utils.Logger;
 import com.tools.gen.utils.P8TradeInfoReader;

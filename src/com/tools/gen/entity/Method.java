@@ -4,6 +4,12 @@ import java.util.List;
 
 public class Method {
 
+    // note
+    private String note;
+
+    // annotations
+    private List<Annotation> annotationList;
+
     // visibility
     private String visibility;
 
@@ -18,6 +24,22 @@ public class Method {
 
     // method content
     private String content;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public List<Annotation> getAnnotationList() {
+        return annotationList;
+    }
+
+    public void setAnnotationList(List<Annotation> annotationList) {
+        this.annotationList = annotationList;
+    }
 
     public String getVisibility() {
         return visibility;
@@ -62,7 +84,9 @@ public class Method {
     @Override
     public String toString() {
         return "Method{" +
-                "visibility='" + visibility + '\'' +
+                "note='" + note + '\'' +
+                ", annotationList=" + annotationList +
+                ", visibility='" + visibility + '\'' +
                 ", returnType='" + returnType + '\'' +
                 ", name='" + name + '\'' +
                 ", paramList=" + paramList +

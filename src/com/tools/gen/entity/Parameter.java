@@ -8,6 +8,9 @@ public class Parameter {
     // param name
     private String name;
 
+    // param value
+    private String value;
+
     public String getType() {
         return type;
     }
@@ -24,11 +27,20 @@ public class Parameter {
         this.name = name;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "Parameter{" +
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

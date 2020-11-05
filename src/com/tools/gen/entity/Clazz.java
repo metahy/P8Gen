@@ -10,6 +10,18 @@ public class Clazz {
     // imports
     private List<String> importList;
 
+    // notes
+    private String note;
+
+    // annotations
+    private List<Annotation> annotationList;
+
+    // visibility
+    private String visibility;
+
+    // type
+    private String type;
+
     // class name
     private String name;
 
@@ -17,7 +29,7 @@ public class Clazz {
     private List<String> implementList;
 
     // extends
-    private List<String> extendList;
+    private String extend;
 
     // fields
     private List<Field> fieldList;
@@ -41,6 +53,38 @@ public class Clazz {
         this.importList = importList;
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public List<Annotation> getAnnotationList() {
+        return annotationList;
+    }
+
+    public void setAnnotationList(List<Annotation> annotationList) {
+        this.annotationList = annotationList;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
@@ -57,12 +101,12 @@ public class Clazz {
         this.implementList = implementList;
     }
 
-    public List<String> getExtendList() {
-        return extendList;
+    public String getExtend() {
+        return extend;
     }
 
-    public void setExtendList(List<String> extendList) {
-        this.extendList = extendList;
+    public void setExtend(String extend) {
+        this.extend = extend;
     }
 
     public List<Field> getFieldList() {
@@ -86,9 +130,13 @@ public class Clazz {
         return "Clazz{" +
                 "pkg='" + pkg + '\'' +
                 ", importList=" + importList +
+                ", note='" + note + '\'' +
+                ", annotationList=" + annotationList +
+                ", visibility='" + visibility + '\'' +
+                ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", implementList=" + implementList +
-                ", extendList=" + extendList +
+                ", extend='" + extend + '\'' +
                 ", fieldList=" + fieldList +
                 ", methodList=" + methodList +
                 '}';

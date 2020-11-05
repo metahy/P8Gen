@@ -1,0 +1,38 @@
+package #(clazz.getPkg());
+#if(clazz.getImportList())
+
+#for(imp : clazz.getImportList())
+import #(imp);
+#end
+#end
+
+#if(clazz.getNote())#(clazz.getNote())#end
+#if(clazz.getAnnotationList())
+#for(annotation : clazz.getAnnotationList())
+@#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+#end
+#end
+#(clazz.getVisibility()) #(clazz.getType()) #(clazz.getName())#if(clazz.getImplementList()) implements #for(impl : clazz.getImplementList())#if(!for.last)#(impl), #else#(impl)#end#end#end#if(clazz.getExtend()) extends #(clazz.getExtend())#end  {
+#for(field : clazz.getFieldList())
+
+#if(field.getNote())#(field.getNote())#end
+    #if(field.getAnnotationList())
+    #for(annotation : field.getAnnotationList())
+    @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+    #end
+    #end
+    #(field.getVisibility()) #(field.getType()) #(field.getName());
+#end
+#for(method : clazz.getMethodList())
+
+#if(method.getNote())#(method.getNote())#end
+    #if(method.getAnnotationList())
+    #for(annotation : method.getAnnotationList())
+    @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+    #end
+    #end
+    #(method.getVisibility()) #(method.getReturnType()) #(method.getName())(#for(method : method.getParamList())#if(!for.last)#(method.getType()) #(method.getName()), #else#(method.getType()) #(method.getName())#end#end) {#(method.getContent())
+    }
+#end
+
+}
