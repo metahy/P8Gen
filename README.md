@@ -45,6 +45,13 @@ Plan
 - [x] method param
 - [ ] method param annotation
 - [x] method content
+- [ ] inner class
+- [ ] static blocks
+- [ ] blocks
+- [ ] constructs(empty and with param)
+- [ ] field default visibility value - private
+- [ ] method default visibility value - public
+- [ ] method default return type - void
 
 `How to use`:
 
