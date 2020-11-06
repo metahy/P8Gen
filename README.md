@@ -58,11 +58,7 @@ public class TestEnjoy {
         Clazz clazz = new Clazz();
         clazz.setPkg("com.test");
         clazz.setImportList(Arrays.asList("java.math.*", "java.text.*"));
-        clazz.setNote(
-                Indents.common(0) + "/**\n" +
-                        Indents.common(0) + " * hello\n" +
-                        Indents.common(0) + " */\n"
-        );
+        clazz.setNote(NoteUtils.multiLine(Arrays.asList("hello"), 0));
         Annotation userAnnotation = new Annotation();
         userAnnotation.setName("Component");
         userAnnotation.setDefaultValue("user");
@@ -82,17 +78,13 @@ public class TestEnjoy {
         clazz.setImplementList(Arrays.asList("Serialize", "Service"));
         clazz.setExtend("InVo");
         Field field1 = new Field();
-        field1.setNote(Indents.common(1) + "// 姓名\n");
+        field1.setNote(NoteUtils.singleLine("姓名" ,1));
         field1.setAnnotationList(Arrays.asList(userAnnotation));
         field1.setVisibility("private");
         field1.setType("String");
         field1.setName("name");
         Field field2 = new Field();
-        field2.setNote(
-                Indents.common(1) + "/**\n" +
-                        Indents.common(1) + " * 密码\n" +
-                        Indents.common(1) + " */\n"
-        );
+        field2.setNote(NoteUtils.multiLine(Arrays.asList("密码", "@Param password"), 1));
         field2.setAnnotationList(Arrays.asList(serverAnnotation));
         field2.setVisibility("private");
         field2.setType("String");
@@ -100,7 +92,7 @@ public class TestEnjoy {
         clazz.setFieldList(Arrays.asList(field1, field2));
 
         Method setName = new Method();
-        setName.setNote(Indents.common(1) + "// set name\n");
+        setName.setNote(NoteUtils.singleLine("set name", 1));
         setName.setVisibility("public");
         setName.setReturnType("void");
         setName.setName("setName");
@@ -111,11 +103,7 @@ public class TestEnjoy {
         setName.setContent(Indents.methodContent("this.name = name;", 1));
 
         Method getName = new Method();
-        getName.setNote(
-                Indents.common(1) + "/**\n" +
-                        Indents.common(1) + " * create a new user\n" +
-                        Indents.common(1) + " */\n"
-        );
+        getName.setNote(NoteUtils.multiLine(Arrays.asList("get name"), 1));
         getName.setVisibility("public");
         getName.setReturnType("String");
         getName.setName("getName");
@@ -143,11 +131,7 @@ public class TestEnjoy {
         getPassword.setContent(Indents.methodContent("return this.password;", 1));
 
         Method create = new Method();
-        create.setNote(
-                Indents.common(1) + "/**\n" +
-                        Indents.common(1) + " * create a new user\n" +
-                        Indents.common(1) + " */\n"
-        );
+        create.setNote(NoteUtils.multiLine(Arrays.asList("create a new user", "@Param name", "@Param password", "@Return user"), 1));
         create.setAnnotationList(Arrays.asList(overrideAnnotation));
         create.setVisibility("public");
         create.setReturnType("User");
@@ -188,6 +172,7 @@ public class User implements Serialize, Service extends InVo {
 
     /**
      * 密码
+     * @Param password
      */
     @Service(target = "/", value = "hi")
     private String password;
@@ -198,7 +183,7 @@ public class User implements Serialize, Service extends InVo {
     }
 
     /**
-     * create a new user
+     * get name
      */
     public String getName() {
         return this.name;
@@ -217,6 +202,9 @@ public class User implements Serialize, Service extends InVo {
 
     /**
      * create a new user
+     * @Param name
+     * @Param password
+     * @Return user
      */
     @Override
     public User create(String name, String password) {
