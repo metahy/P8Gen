@@ -11,7 +11,7 @@ public class Annotation {
 
     private String defaultValue;
 
-    private List<Parameter> paramList;
+    private List<Param> paramList;
 
     public String getName() {
         return name;
@@ -29,11 +29,11 @@ public class Annotation {
         this.defaultValue = defaultValue;
     }
 
-    public List<Parameter> getParamList() {
+    public List<Param> getParamList() {
         return paramList;
     }
 
-    public void setParamList(List<Parameter> paramList) {
+    public void setParamList(List<Param> paramList) {
         this.paramList = paramList;
     }
 

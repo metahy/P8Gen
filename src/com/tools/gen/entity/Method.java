@@ -20,7 +20,7 @@ public class Method {
     private String name;
 
     // params
-    private List<Parameter> paramList;
+    private List<Param> paramList;
 
     // method content
     private String content;
@@ -65,11 +65,11 @@ public class Method {
         this.name = name;
     }
 
-    public List<Parameter> getParamList() {
+    public List<Param> getParamList() {
         return paramList;
     }
 
-    public void setParamList(List<Parameter> paramList) {
+    public void setParamList(List<Param> paramList) {
         this.paramList = paramList;
     }
 

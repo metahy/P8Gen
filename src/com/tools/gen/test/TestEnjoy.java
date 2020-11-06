@@ -1,10 +1,7 @@
 package com.tools.gen.test;
 
-import com.jfinal.kit.Kv;
-import com.jfinal.template.Engine;
-import com.jfinal.template.Template;
-import com.jfinal.template.source.FileSource;
 import com.tools.gen.entity.*;
+import com.tools.gen.utils.GenUtils;
 import com.tools.gen.utils.Indents;
 import com.tools.gen.utils.NoteUtils;
 
@@ -16,10 +13,6 @@ import java.util.Collections;
  */
 public class TestEnjoy {
     public static void main(String[] args) {
-        Engine engine = Engine.create("MyFirst");
-        engine.setDevMode(true);
-        Template template = engine.getTemplate(new FileSource("resources", "class.tmpl"));
-
         Clazz clazz = new Clazz();
         clazz.setPkg("com.test");
         clazz.setImportList(Arrays.asList("java.math.*", "java.text.*"));
@@ -29,10 +22,10 @@ public class TestEnjoy {
         userAnnotation.setDefaultValue("user");
         Annotation serverAnnotation = new Annotation();
         serverAnnotation.setName("Service");
-        Parameter annoParam1 = new Parameter();
+        Param annoParam1 = new Param();
         annoParam1.setName("target");
         annoParam1.setValue("/");
-        Parameter annoParam2 = new Parameter();
+        Param annoParam2 = new Param();
         annoParam2.setName("value");
         annoParam2.setValue("hi");
         serverAnnotation.setParamList(Arrays.asList(annoParam1, annoParam2));
@@ -61,18 +54,18 @@ public class TestEnjoy {
         setName.setVisibility("public");
         setName.setReturnType("void");
         setName.setName("setName");
-        Parameter name = new Parameter();
+        Param name = new Param();
         name.setType("String");
         name.setName("name");
         setName.setParamList(Collections.singletonList(name));
-        setName.setContent(Indents.methodContent("this.name = name;", 1));
+        setName.setContent(Indents.method("this.name = name;", 1));
 
         Method getName = new Method();
         getName.setNote(NoteUtils.multiLine(Arrays.asList("get name"), 1));
         getName.setVisibility("public");
         getName.setReturnType("String");
         getName.setName("getName");
-        getName.setContent(Indents.methodContent("return this.name;", 1));
+        getName.setContent(Indents.method("return this.name;", 1));
 
         Method setPassword = new Method();
         Annotation overrideAnnotation = new Annotation();
@@ -81,19 +74,19 @@ public class TestEnjoy {
         setPassword.setVisibility("public");
         setPassword.setReturnType("void");
         setPassword.setName("setPassword");
-        Parameter password = new Parameter();
+        Param password = new Param();
         password.setType("String");
         password.setName("password");
         setPassword.setParamList(Collections.singletonList(password));
-        setPassword.setContent(Indents.methodContent("this.password = password;", 1));
+        setPassword.setContent(Indents.method("this.password = password;", 1));
 
         Method getPassword = new Method();
-        getPassword.setNote(Indents.common(1) + "// get password\n");
+        getPassword.setNote(NoteUtils.singleLine("get password", 1));
         getPassword.setAnnotationList(Arrays.asList(overrideAnnotation));
         getPassword.setVisibility("public");
         getPassword.setReturnType("String");
         getPassword.setName("getPassword");
-        getPassword.setContent(Indents.methodContent("return this.password;", 1));
+        getPassword.setContent(Indents.method("return this.password;", 1));
 
         Method create = new Method();
         create.setNote(NoteUtils.multiLine(Arrays.asList("create a new user", "@Param name", "@Param password", "@Return user"), 1));
@@ -103,15 +96,13 @@ public class TestEnjoy {
         create.setName("create");
         create.setParamList(Arrays.asList(name, password));
         String sb =
-                Indents.methodContent("User user = new User();", 1) +
-                Indents.methodContent("user.setName(name);", 1) +
-                Indents.methodContent("user.setPassword(password);", 1) +
-                Indents.methodContent("return user;", 1);
+                Indents.method("User user = new User();", 1) +
+                Indents.method("user.setName(name);", 1) +
+                Indents.method("user.setPassword(password);", 1) +
+                Indents.method("return user;", 1);
         create.setContent(sb);
         clazz.setMethodList(Arrays.asList(setName, getName, setPassword, getPassword, create));
 
-        String s = template.renderToString(Kv.by("clazz", clazz));
-
-        System.out.println(s);
+        System.out.println(GenUtils.genClazz(clazz));
     }
 }

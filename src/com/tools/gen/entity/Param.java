@@ -1,6 +1,6 @@
 package com.tools.gen.entity;
 
-public class Parameter {
+public class Param {
 
     // param type
     private String type;
@@ -37,7 +37,7 @@ public class Parameter {
 
     @Override
     public String toString() {
-        return "Parameter{" +
+        return "Param{" +
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", value='" + value + '\'' +
