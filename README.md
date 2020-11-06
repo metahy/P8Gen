@@ -4,6 +4,48 @@
 
 Component: *Enjoy Template Engine*
 
+Plan
+- [x] package
+- [x] imports
+- [x] class notes
+- [x] class annotation
+- [x] class annotation default value
+- [x] class annotation param
+- [ ] class hasVisibility
+- [x] class visibility
+- [ ] class isAbstract
+- [ ] class isFinal
+- [ ] class isStatic(inner class)
+- [x] class type
+- [x] class name
+- [x] class implements
+- [x] class extends
+- [x] field notes
+- [x] field annotation
+- [x] field annotation default value
+- [x] field annotation param
+- [ ] field hasVisibility
+- [x] field visibility
+- [ ] field isStatic
+- [ ] field isFinal
+- [ ] field isVolatile
+- [x] field type
+- [x] field name
+- [x] method notes
+- [x] method annotation
+- [x] method annotation default value
+- [x] method annotation param
+- [ ] method hasVisibility
+- [x] method visibility
+- [ ] method isStatic
+- [ ] method isFinal
+- [ ] method isSynchronized
+- [x] method return type
+- [x] method name
+- [x] method param
+- [ ] method param annotation
+- [x] method content
+
 `How to use`:
 
 ```java
