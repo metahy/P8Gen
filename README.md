@@ -21,6 +21,14 @@ Plan
 - [x] class name
 - [x] class implements
 - [x] class extends
+- [ ] interface
+- [ ] interface implements
+- [ ] interface extends
+- [ ] interface field
+- [ ] interface method
+- [ ] interface default method
+- [ ] enum about...
+- [ ] annotation about...
 - [x] field notes
 - [x] field annotation
 - [x] field annotation default value
