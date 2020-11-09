@@ -5,6 +5,8 @@
 Component: *Enjoy Template Engine*
 
 Plan
+
+> About generator 
 - [x] package
 - [x] imports
 - [x] class notes
@@ -52,6 +54,15 @@ Plan
 - [ ] field default visibility value - private
 - [ ] method default visibility value - public
 - [ ] method default return type - void
+
+> About trade
+- [ ] trade reader
+- [ ] inVo
+- [ ] outVo
+- [ ] service
+- [ ] service implement
+- [ ] data transform xml
+- [ ] other class in inVo or outVo
 
 `How to use`:
 
