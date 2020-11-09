@@ -18,7 +18,6 @@ Plan
 - [ ] class isAbstract
 - [ ] class isFinal
 - [ ] class isStatic(inner class)
-- [x] class type
 - [x] class name
 - [x] class implements
 - [x] class extends

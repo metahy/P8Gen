@@ -31,7 +31,6 @@ public class TestEnjoy {
         serverAnnotation.setParamList(Arrays.asList(annoParam1, annoParam2));
         clazz.setAnnotationList(Arrays.asList(userAnnotation, serverAnnotation));
         clazz.setVisibility("public");
-        clazz.setType("class");
         clazz.setName("User");
         clazz.setImplementList(Arrays.asList("Serialize", "Service"));
         clazz.setExtend("InVo");

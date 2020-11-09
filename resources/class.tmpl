@@ -12,7 +12,7 @@ import #(imp);
 @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
 #end
 #end
-#(clazz.getVisibility()) #(clazz.getType()) #(clazz.getName())#if(clazz.getImplementList()) implements #for(impl : clazz.getImplementList())#if(!for.last)#(impl), #else#(impl)#end#end#end#if(clazz.getExtend()) extends #(clazz.getExtend())#end  {
+#(clazz.getVisibility()) class #(clazz.getName())#if(clazz.getImplementList()) implements #for(impl : clazz.getImplementList())#if(!for.last)#(impl), #else#(impl)#end#end#end#if(clazz.getExtend()) extends #(clazz.getExtend())#end  {
 #for(field : clazz.getFieldList())
 
 #if(field.getNote())#(field.getNote())#end

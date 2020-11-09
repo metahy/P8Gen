@@ -19,9 +19,6 @@ public class Clazz {
     // visibility
     private String visibility;
 
-    // type
-    private String type;
-
     // class name
     private String name;
 
@@ -77,14 +74,6 @@ public class Clazz {
         this.visibility = visibility;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getName() {
         return name;
     }
@@ -133,7 +122,6 @@ public class Clazz {
                 ", note='" + note + '\'' +
                 ", annotationList=" + annotationList +
                 ", visibility='" + visibility + '\'' +
-                ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", implementList=" + implementList +
                 ", extend='" + extend + '\'' +
