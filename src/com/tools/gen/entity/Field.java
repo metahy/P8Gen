@@ -11,7 +11,7 @@ public class Field {
     private List<Annotation> annotationList;
 
     // visibility
-    private String visibility;
+    private String visibility = "private";
 
     // type
     private String type;

@@ -57,9 +57,10 @@ Plan
 - [ ] static blocks
 - [ ] blocks
 - [ ] constructs(empty and with param)
-- [ ] field default visibility value - private
-- [ ] method default visibility value - public
-- [ ] method default return type - void
+- [x] class default visibility value - public
+- [x] field default visibility value - private
+- [x] method default visibility value - public
+- [x] method default return type - void
 
 > About trade
 - [ ] trade reader

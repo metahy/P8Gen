@@ -11,10 +11,10 @@ public class Method {
     private List<Annotation> annotationList;
 
     // visibility
-    private String visibility;
+    private String visibility = "private";
 
     // return type
-    private String returnType;
+    private String returnType = "void";
 
     // method name
     private String name;

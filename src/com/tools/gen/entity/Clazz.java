@@ -17,7 +17,7 @@ public class Clazz {
     private List<Annotation> annotationList;
 
     // visibility
-    private String visibility;
+    private String visibility = "public";
 
     // class name
     private String name;
