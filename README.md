@@ -13,7 +13,6 @@ Plan
 - [x] class annotation
 - [x] class annotation default value
 - [x] class annotation param
-- [ ] class hasVisibility
 - [x] class visibility
 - [ ] class isAbstract
 - [ ] class isFinal

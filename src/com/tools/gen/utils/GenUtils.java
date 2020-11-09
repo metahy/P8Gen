@@ -8,7 +8,7 @@ import com.tools.gen.entity.Clazz;
 
 public class GenUtils {
 
-    public static String genClazz(Clazz clazz) {
+    public static String generate(Clazz clazz) {
         Engine engine = Engine.create("GenEngine");
         engine.setDevMode(true);
         Template template = engine.getTemplate(new FileSource("resources", "class.tmpl"));

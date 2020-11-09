@@ -102,6 +102,6 @@ public class TestEnjoy {
         create.setContent(sb);
         clazz.setMethodList(Arrays.asList(setName, getName, setPassword, getPassword, create));
 
-        System.out.println(GenUtils.genClazz(clazz));
+        System.out.println(GenUtils.generate(clazz));
     }
 }
