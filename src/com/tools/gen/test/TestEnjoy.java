@@ -32,12 +32,15 @@ public class TestEnjoy {
         clazz.setAnnotationList(Arrays.asList(userAnnotation, serverAnnotation));
         clazz.setVisibility("public");
         clazz.setName("User");
+        clazz.setAbstract(true);
+        clazz.setFinal(true);
+        clazz.setStatic(true);
         clazz.setImplementList(Arrays.asList("Serialize", "Service"));
         clazz.setExtend("InVo");
         Field field1 = new Field();
         field1.setNote(NoteUtils.singleLine("姓名" ,1));
         field1.setAnnotationList(Arrays.asList(userAnnotation));
-//        field1.setVisibility("public");
+        field1.setVisibility("private");
         field1.setType("String");
         field1.setName("name");
 //        field1.setFinal(true);
@@ -55,7 +58,7 @@ public class TestEnjoy {
         Method setName = new Method();
         setName.setNote(NoteUtils.singleLine("set name", 1));
         setName.setVisibility("public");
-        setName.setReturnType("void");
+//        setName.setReturnType("void");
         setName.setName("setName");
         Param name = new Param();
         name.setType("String");
@@ -95,6 +98,9 @@ public class TestEnjoy {
         create.setNote(NoteUtils.multiLine(Arrays.asList("create a new user", "@Param name", "@Param password", "@Return user"), 1));
         create.setAnnotationList(Arrays.asList(overrideAnnotation));
         create.setVisibility("public");
+//        create.setStatic(true);
+//        create.setFinal(true);
+//        create.setSynchronized(true);
         create.setReturnType("User");
         create.setName("create");
         create.setParamList(Arrays.asList(name, password));
