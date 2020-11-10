@@ -13,11 +13,23 @@ public class Field {
     // visibility
     private String visibility = "private";
 
+    // is field static
+    private boolean isStatic;
+
+    // is field final
+    private boolean isFinal;
+
+    // is field volatile
+    private boolean isVolatile;
+
     // type
     private String type;
 
     // field name
     private String name;
+
+    // default value
+    private String value;
 
     public Field() {
     }
@@ -53,6 +65,30 @@ public class Field {
         this.visibility = visibility;
     }
 
+    public boolean isStatic() {
+        return isStatic;
+    }
+
+    public void setStatic(boolean aStatic) {
+        isStatic = aStatic;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
+    }
+
+    public void setFinal(boolean aFinal) {
+        isFinal = aFinal;
+    }
+
+    public boolean isVolatile() {
+        return isVolatile;
+    }
+
+    public void setVolatile(boolean aVolatile) {
+        isVolatile = aVolatile;
+    }
+
     public String getType() {
         return type;
     }
@@ -69,14 +105,26 @@ public class Field {
         this.name = name;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "Field{" +
                 "note='" + note + '\'' +
                 ", annotationList=" + annotationList +
                 ", visibility='" + visibility + '\'' +
+                ", isStatic=" + isStatic +
+                ", isFinal=" + isFinal +
+                ", isVolatile=" + isVolatile +
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

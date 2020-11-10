@@ -31,6 +31,10 @@ public class Clazz {
     // fields
     private List<Field> fieldList;
 
+    // TODO static blocks
+
+    // TODO blocks
+
     // methods
     private List<Method> methodList;
 

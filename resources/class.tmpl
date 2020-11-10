@@ -21,7 +21,7 @@ import #(imp);
     @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
     #end
     #end
-    #(field.getVisibility()) #(field.getType()) #(field.getName());
+    #if(field.getVisibility())#(field.getVisibility()) #end #if(field.isStatic())static #end #if(field.isFinal())final #end #if(field.isVolatile())volatile #end #(field.getType()) #(field.getName())#if(field.getValue()) = #(field.getValue())#end;
 #end
 #for(method : clazz.getMethodList())
 
