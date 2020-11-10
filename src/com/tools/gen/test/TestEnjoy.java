@@ -37,9 +37,13 @@ public class TestEnjoy {
         Field field1 = new Field();
         field1.setNote(NoteUtils.singleLine("姓名" ,1));
         field1.setAnnotationList(Arrays.asList(userAnnotation));
-        field1.setVisibility("private");
+//        field1.setVisibility("public");
         field1.setType("String");
         field1.setName("name");
+//        field1.setFinal(true);
+//        field1.setStatic(true);
+//        field1.setVolatile(true);
+//        field1.setValue("\"zhangsan\"");
         Field field2 = new Field();
         field2.setNote(NoteUtils.multiLine(Arrays.asList("密码", "@Param password"), 1));
         field2.setAnnotationList(Arrays.asList(serverAnnotation));
