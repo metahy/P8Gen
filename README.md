@@ -14,12 +14,16 @@ Plan
 - [x] class annotation default value
 - [x] class annotation param
 - [x] class visibility
-- [ ] class isAbstract
-- [ ] class isFinal
-- [ ] class isStatic(inner class)
+- [x] class isAbstract
+- [x] class isFinal
+- [x] class isStatic(for inner class)
+- [ ] inner class
 - [x] class name
 - [x] class implements
 - [x] class extends
+- [ ] static blocks
+- [ ] blocks
+- [ ] constructs(empty and with param)
 - [ ] interface
 - [ ] interface implements
 - [ ] interface extends
@@ -43,23 +47,18 @@ Plan
 - [x] method annotation
 - [x] method annotation default value
 - [x] method annotation param
-- [ ] method hasVisibility
 - [x] method visibility
-- [ ] method isStatic
-- [ ] method isFinal
-- [ ] method isSynchronized
+- [x] method isStatic
+- [x] method isFinal
+- [x] method isSynchronized
 - [x] method return type
 - [x] method name
 - [x] method param
 - [ ] method param annotation
 - [x] method content
-- [ ] inner class
-- [ ] static blocks
-- [ ] blocks
-- [ ] constructs(empty and with param)
-- [x] class default visibility value - public
-- [x] field default visibility value - private
-- [x] method default visibility value - public
+- [x] ~~class default visibility value - public~~
+- [x] ~~field default visibility value - private~~
+- [x] ~~method default visibility value - public~~
 - [x] method default return type - void
 
 > About trade
