@@ -11,7 +11,16 @@ public class Method {
     private List<Annotation> annotationList;
 
     // visibility
-    private String visibility = "private";
+    private String visibility;
+
+    // is static
+    private boolean isStatic;
+
+    // is final
+    private boolean isFinal;
+
+    // is sync
+    private boolean isSynchronized;
 
     // return type
     private String returnType = "void";
@@ -47,6 +56,30 @@ public class Method {
 
     public void setVisibility(String visibility) {
         this.visibility = visibility;
+    }
+
+    public boolean isStatic() {
+        return isStatic;
+    }
+
+    public void setStatic(boolean aStatic) {
+        isStatic = aStatic;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
+    }
+
+    public void setFinal(boolean aFinal) {
+        isFinal = aFinal;
+    }
+
+    public boolean isSynchronized() {
+        return isSynchronized;
+    }
+
+    public void setSynchronized(boolean aSynchronized) {
+        isSynchronized = aSynchronized;
     }
 
     public String getReturnType() {
@@ -87,6 +120,9 @@ public class Method {
                 "note='" + note + '\'' +
                 ", annotationList=" + annotationList +
                 ", visibility='" + visibility + '\'' +
+                ", isStatic=" + isStatic +
+                ", isFinal=" + isFinal +
+                ", isSynchronized=" + isSynchronized +
                 ", returnType='" + returnType + '\'' +
                 ", name='" + name + '\'' +
                 ", paramList=" + paramList +

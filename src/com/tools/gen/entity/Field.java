@@ -11,7 +11,7 @@ public class Field {
     private List<Annotation> annotationList;
 
     // visibility
-    private String visibility = "private";
+    private String visibility;
 
     // is field static
     private boolean isStatic;
