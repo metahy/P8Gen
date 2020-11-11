@@ -63,6 +63,10 @@ public class TestEnjoy {
         Param name = new Param();
         name.setType("String");
         name.setName("name");
+        Annotation nameAnno = new Annotation();
+        nameAnno.setName("Param");
+        nameAnno.setDefaultValue("name");
+        name.setAnnotation(nameAnno);
         setName.setParamList(Collections.singletonList(name));
         setName.setContent(Indents.method("this.name = name;", 1));
 
@@ -83,6 +87,10 @@ public class TestEnjoy {
         Param password = new Param();
         password.setType("String");
         password.setName("password");
+        Annotation passwordAnno = new Annotation();
+        passwordAnno.setName("Param");
+        passwordAnno.setDefaultValue("password");
+        password.setAnnotation(passwordAnno);
         setPassword.setParamList(Collections.singletonList(password));
         setPassword.setContent(Indents.method("this.password = password;", 1));
 
