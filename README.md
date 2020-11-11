@@ -54,7 +54,7 @@ Plan
 - [x] method return type
 - [x] method name
 - [x] method param
-- [ ] method param annotation
+- [x] method param annotation
 - [x] method content
 - [x] ~~class default visibility value - public~~
 - [x] ~~field default visibility value - private~~
@@ -125,6 +125,10 @@ public class TestEnjoy {
         Param name = new Param();
         name.setType("String");
         name.setName("name");
+        Annotation nameAnno = new Annotation();
+        nameAnno.setName("Param");
+        nameAnno.setDefaultValue("name");
+        name.setAnnotation(nameAnno);
         setName.setParamList(Collections.singletonList(name));
         setName.setContent(Indents.method("this.name = name;", 1));
 
@@ -145,6 +149,10 @@ public class TestEnjoy {
         Param password = new Param();
         password.setType("String");
         password.setName("password");
+        Annotation passwordAnno = new Annotation();
+        passwordAnno.setName("Param");
+        passwordAnno.setDefaultValue("password");
+        password.setAnnotation(passwordAnno);
         setPassword.setParamList(Collections.singletonList(password));
         setPassword.setContent(Indents.method("this.password = password;", 1));
 
@@ -205,7 +213,7 @@ public abstract final static class User implements Serialize, Service extends In
     private String password;
 
     // set name
-    public void setName(String name) {
+    public void setName(@Param("name") String name) {
         this.name = name;
     }
 
@@ -217,7 +225,7 @@ public abstract final static class User implements Serialize, Service extends In
     }
 
     @Override
-    public void setPassword(String password) {
+    public void setPassword(@Param("password") String password) {
         this.password = password;
     }
 
@@ -234,7 +242,7 @@ public abstract final static class User implements Serialize, Service extends In
      * @Return user
      */
     @Override
-    public User create(String name, String password) {
+    public User create(@Param("name") String name, @Param("password") String password) {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
