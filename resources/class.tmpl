@@ -31,7 +31,7 @@ import #(imp);
     @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
     #end
     #end
-    #if(method.getVisibility())#(method.getVisibility()) #end #if(method.isStatic())static #end #if(method.isFinal())final #end #if(method.isSynchronized())synchronized #end #(method.getReturnType()) #(method.getName())(#for(method : method.getParamList())#if(!for.last)#(method.getType()) #(method.getName()), #else#(method.getType()) #(method.getName())#end#end) {#(method.getContent())
+    #if(method.getVisibility())#(method.getVisibility()) #end #if(method.isStatic())static #end #if(method.isFinal())final #end #if(method.isSynchronized())synchronized #end #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end) {#(method.getContent())
     }
 #end
 
