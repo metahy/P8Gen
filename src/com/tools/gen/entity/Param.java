@@ -1,5 +1,7 @@
 package com.tools.gen.entity;
 
+import java.util.List;
+
 public class Param {
 
     // param type
@@ -10,6 +12,9 @@ public class Param {
 
     // param value
     private String value;
+
+    // param annotation
+    private List<Annotation> annotationList;
 
     public String getType() {
         return type;
@@ -35,12 +40,21 @@ public class Param {
         this.value = value;
     }
 
+    public List<Annotation> getAnnotationList() {
+        return annotationList;
+    }
+
+    public void setAnnotationList(List<Annotation> annotationList) {
+        this.annotationList = annotationList;
+    }
+
     @Override
     public String toString() {
         return "Param{" +
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", value='" + value + '\'' +
+                ", annotationList=" + annotationList +
                 '}';
     }
 }
