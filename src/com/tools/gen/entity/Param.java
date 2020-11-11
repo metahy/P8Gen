@@ -14,7 +14,7 @@ public class Param {
     private String value;
 
     // param annotation
-    private List<Annotation> annotationList;
+    private Annotation annotation;
 
     public String getType() {
         return type;
@@ -40,12 +40,12 @@ public class Param {
         this.value = value;
     }
 
-    public List<Annotation> getAnnotationList() {
-        return annotationList;
+    public Annotation getAnnotation() {
+        return annotation;
     }
 
-    public void setAnnotationList(List<Annotation> annotationList) {
-        this.annotationList = annotationList;
+    public void setAnnotation(Annotation annotation) {
+        this.annotation = annotation;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Param {
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", value='" + value + '\'' +
-                ", annotationList=" + annotationList +
+                ", annotation=" + annotation +
                 '}';
     }
 }
