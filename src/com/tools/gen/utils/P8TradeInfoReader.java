@@ -1,5 +1,7 @@
 package com.tools.gen.utils;
 
+import com.tools.gen.Main;
+import com.tools.gen.entity.Clazz;
 import com.tools.gen.entity.P8TradeInfo;
 
 import java.io.BufferedReader;
@@ -25,12 +27,12 @@ public class P8TradeInfoReader {
         // get trade inVo lines
         List<String> inVoLines = getInVoLines(lines);
         // deal trade inVo
-        // TODO
+        genAndSetInVo(tradeInfo, inVoLines);
 
         // get trade outVo lines
         List<String> outVoLines = getOutVoLines(lines);
         // deal trade outVo
-        // TODO
+        genAndSetOutVo(tradeInfo, outVoLines);
 
         return tradeInfo;
     }
@@ -113,4 +115,23 @@ public class P8TradeInfoReader {
 
         return outVoLines;
     }
+
+    private static void genAndSetInVo(P8TradeInfo tradeInfo, List<String> lines) {
+        Clazz inVo = new Clazz();
+        inVo.setPkg(Main.basePackage + ".business.vo");
+
+
+
+        // TODO
+    }
+
+    private static void genAndSetOutVo(P8TradeInfo tradeInfo, List<String> lines) {
+        Clazz outVo = new Clazz();
+        outVo.setPkg(Main.basePackage + ".business.vo");
+
+
+
+        // TODO
+    }
+
 }
