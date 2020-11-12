@@ -7,6 +7,7 @@ import com.tools.gen.entity.P8TradeInfo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class P8TradeInfoReader {
@@ -119,9 +120,44 @@ public class P8TradeInfoReader {
     private static void genAndSetInVo(P8TradeInfo tradeInfo, List<String> lines) {
         Clazz inVo = new Clazz();
         inVo.setPkg(Main.basePackage + ".business.vo");
+        Set<String> importSet = new TreeSet<>();
 
+        List<List<String>> fieldList = new ArrayList<>();
 
+        List<String> field = null;
+        if (lines.size() > 0) {
+            for (String line : lines) {
+                String[] ss = line.split("\t");
+                if ("Group".equals(ss[4])) {
+                    importSet.add(ss[0].substring(0, ss[0].length()-4));
+                    field = new ArrayList<>();
+                    field.add(line);
+                } else if (ss[0].startsWith("..")) {
+                    if (field != null) {
+                        field.add(line);
+                    }
+                } else {
+                    if (field != null) {
+                        fieldList.add(field);
+                    }
+                    field = new ArrayList<>();
+                    field.add(line);
+                    if ("N".equals(ss[4])) {
+                        importSet.add("java.math.BigDecimal");
+                    }
+                    fieldList.add(field);
+                    field = null;
+                }
+            }
+            if (field != null) {
+                fieldList.add(field);
+            }
+        }
 
+        inVo.setImportSet(importSet);
+
+        Logger.info(fieldList);
+        tradeInfo.setInVo(inVo);
         // TODO
     }
 
