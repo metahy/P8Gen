@@ -1,6 +1,7 @@
 package com.tools.gen.entity;
 
 import java.util.List;
+import java.util.Set;
 
 public class Clazz {
 
@@ -8,7 +9,7 @@ public class Clazz {
     private String pkg;
 
     // imports
-    private List<String> importList;
+    private Set<String> importSet;
 
     // notes
     private String note;
@@ -32,10 +33,10 @@ public class Clazz {
     private String name;
 
     // implements
-    private List<String> implementList;
+    private Set<String> implementSet;
 
     // extends
-    private String extend;
+    private Set<String> extendsSet;
 
     // fields
     private List<Field> fieldList;
@@ -63,12 +64,12 @@ public class Clazz {
         this.pkg = pkg;
     }
 
-    public List<String> getImportList() {
-        return importList;
+    public Set<String> getImportSet() {
+        return importSet;
     }
 
-    public void setImportList(List<String> importList) {
-        this.importList = importList;
+    public void setImportSet(Set<String> importSet) {
+        this.importSet = importSet;
     }
 
     public String getNote() {
@@ -127,20 +128,20 @@ public class Clazz {
         this.name = name;
     }
 
-    public List<String> getImplementList() {
-        return implementList;
+    public Set<String> getImplementSet() {
+        return implementSet;
     }
 
-    public void setImplementList(List<String> implementList) {
-        this.implementList = implementList;
+    public void setImplementSet(Set<String> implementSet) {
+        this.implementSet = implementSet;
     }
 
-    public String getExtend() {
-        return extend;
+    public Set<String> getExtendsSet() {
+        return extendsSet;
     }
 
-    public void setExtend(String extend) {
-        this.extend = extend;
+    public void setExtendsSet(Set<String> extendsSet) {
+        this.extendsSet = extendsSet;
     }
 
     public List<Field> getFieldList() {
@@ -195,7 +196,7 @@ public class Clazz {
     public String toString() {
         return "Clazz{" +
                 "pkg='" + pkg + '\'' +
-                ", importList=" + importList +
+                ", importSet=" + importSet +
                 ", note='" + note + '\'' +
                 ", annotationList=" + annotationList +
                 ", visibility='" + visibility + '\'' +
@@ -203,8 +204,8 @@ public class Clazz {
                 ", isFinal=" + isFinal +
                 ", isStatic=" + isStatic +
                 ", name='" + name + '\'' +
-                ", implementList=" + implementList +
-                ", extend='" + extend + '\'' +
+                ", implementSet=" + implementSet +
+                ", extendsSet='" + extendsSet + '\'' +
                 ", fieldList=" + fieldList +
                 ", constructorList=" + constructorList +
                 ", staticBlockList=" + staticBlockList +
