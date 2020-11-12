@@ -36,7 +36,7 @@ public class Clazz {
     private Set<String> implementSet;
 
     // extends
-    private Set<String> extendsSet;
+    private String extend;
 
     // fields
     private List<Field> fieldList;
@@ -136,12 +136,12 @@ public class Clazz {
         this.implementSet = implementSet;
     }
 
-    public Set<String> getExtendsSet() {
-        return extendsSet;
+    public String getExtend() {
+        return extend;
     }
 
-    public void setExtendsSet(Set<String> extendsSet) {
-        this.extendsSet = extendsSet;
+    public void setExtend(String extend) {
+        this.extend = extend;
     }
 
     public List<Field> getFieldList() {
@@ -205,7 +205,7 @@ public class Clazz {
                 ", isStatic=" + isStatic +
                 ", name='" + name + '\'' +
                 ", implementSet=" + implementSet +
-                ", extendsSet='" + extendsSet + '\'' +
+                ", extend='" + extend + '\'' +
                 ", fieldList=" + fieldList +
                 ", constructorList=" + constructorList +
                 ", staticBlockList=" + staticBlockList +
