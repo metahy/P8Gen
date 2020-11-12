@@ -129,7 +129,7 @@ public class P8TradeInfoReader {
             for (String line : lines) {
                 String[] ss = line.split("\t");
                 if ("Group".equals(ss[4])) {
-                    importSet.add(ss[0].substring(0, ss[0].length()-4));
+                    importSet.add(Main.basePackage + ".business.vo." + CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length()-4)));
                     field = new ArrayList<>();
                     field.add(line);
                 } else if (ss[0].startsWith("..")) {
@@ -155,10 +155,15 @@ public class P8TradeInfoReader {
         }
 
         inVo.setImportSet(importSet);
+        inVo.setVisibility("public");
+        inVo.setName(tradeInfo.getTradeCd() + "InVo");
+        Set<String> implementSet = new TreeSet<>();
+        implementSet.add("TxRequestMsgBodyEntity");
+        inVo.setImplementSet(implementSet);
 
         Logger.info(fieldList);
-        tradeInfo.setInVo(inVo);
         // TODO
+        tradeInfo.setInVo(inVo);
     }
 
     private static void genAndSetOutVo(P8TradeInfo tradeInfo, List<String> lines) {
@@ -168,6 +173,7 @@ public class P8TradeInfoReader {
 
 
         // TODO
+        tradeInfo.setOutVo(outVo);
     }
 
 }
