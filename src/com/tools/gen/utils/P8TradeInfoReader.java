@@ -2,6 +2,7 @@ package com.tools.gen.utils;
 
 import com.tools.gen.Main;
 import com.tools.gen.entity.Clazz;
+import com.tools.gen.entity.Field;
 import com.tools.gen.entity.P8TradeInfo;
 
 import java.io.BufferedReader;
@@ -158,10 +159,20 @@ public class P8TradeInfoReader {
         inVo.setVisibility("public");
         inVo.setName(tradeInfo.getTradeCd() + "InVo");
         Set<String> implementSet = new TreeSet<>();
+        implementSet.add("Serializable");
         implementSet.add("TxRequestMsgBodyEntity");
         inVo.setImplementSet(implementSet);
+        List<Field> fields = new ArrayList<>();
+        Field serialVersionUID = new Field();
+        serialVersionUID.setVisibility("private");
+        serialVersionUID.setStatic(true);
+        serialVersionUID.setFinal(true);
+        serialVersionUID.setType("long");
+        serialVersionUID.setName("serialVersionUID");
+        serialVersionUID.setValue("1L");
+        fields.add(serialVersionUID);
+        inVo.setStaticFieldList(fields);
 
-        Logger.info(fieldList);
         // TODO
         tradeInfo.setInVo(inVo);
     }
