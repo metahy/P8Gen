@@ -8,7 +8,7 @@ Plan
 
 > About generator 
 - [x] package
-- [ ] import set
+- [x] import set
 - [x] class notes
 - [x] class annotation
 - [x] class annotation default value
@@ -19,14 +19,14 @@ Plan
 - [x] class isStatic(for inner class)
 - [ ] inner class
 - [x] class name
-- [ ] class implement set
-- [ ] class extends set
+- [x] class implement set
+- [x] class extend
 - [ ] static blocks
 - [ ] blocks
 - [ ] constructs(empty and with param)
 - [ ] interface
 - [ ] interface implements
-- [ ] interface extends
+- [ ] interface extends(multi)
 - [ ] interface field
 - [ ] interface method
 - [ ] interface default method

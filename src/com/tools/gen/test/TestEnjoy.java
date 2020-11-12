@@ -5,8 +5,7 @@ import com.tools.gen.utils.GenUtils;
 import com.tools.gen.utils.Indents;
 import com.tools.gen.utils.NoteUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * @author hiram 2020年11月05日 23:28
@@ -15,7 +14,10 @@ public class TestEnjoy {
     public static void main(String[] args) {
         Clazz clazz = new Clazz();
         clazz.setPkg("com.test");
-        clazz.setImportList(Arrays.asList("java.math.*", "java.text.*"));
+        Set<String> importSet = new TreeSet<>();
+        importSet.add("java.math.*");
+        importSet.add("java.text.*");
+        clazz.setImportSet(importSet);
         clazz.setNote(NoteUtils.multiLine(Arrays.asList("hello"), 0));
         Annotation userAnnotation = new Annotation();
         userAnnotation.setName("Component");
@@ -35,7 +37,10 @@ public class TestEnjoy {
         clazz.setAbstract(true);
         clazz.setFinal(true);
         clazz.setStatic(true);
-        clazz.setImplementList(Arrays.asList("Serialize", "Service"));
+        Set<String> implementSet = new TreeSet<>();
+        implementSet.add("Serialize");
+        implementSet.add("Service");
+        clazz.setImplementSet(implementSet);
         clazz.setExtend("InVo");
         Field field1 = new Field();
         field1.setNote(NoteUtils.singleLine("姓名" ,1));

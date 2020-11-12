@@ -12,7 +12,7 @@ import #(imp);
 @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
 #end
 #end
-#if(clazz.getVisibility())#(clazz.getVisibility()) #end #if(clazz.isAbstract())abstract #end #if(clazz.isFinal())final #end #if(clazz.isStatic())static #end class #(clazz.getName())#if(clazz.getImplementSet()) implements #for(impl : clazz.getImplementSet())#if(!for.last)#(impl), #else#(impl)#end#end#end#if(clazz.getExtendsSet()) extends #for(ext : clazz.getExtendsSet())#if(!for.last)#(ext), #else#(ext)#end#end#end  {
+#if(clazz.getVisibility())#(clazz.getVisibility()) #end #if(clazz.isAbstract())abstract #end #if(clazz.isFinal())final #end #if(clazz.isStatic())static #end class #(clazz.getName())#if(clazz.getImplementSet()) implements #for(impl : clazz.getImplementSet())#if(!for.last)#(impl), #else#(impl)#end#end#end#if(clazz.getExtend()) extends #(clazz.getExtend())#end  {
 #for(field : clazz.getFieldList())
 
 #if(field.getNote())#(field.getNote())#end
