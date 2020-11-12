@@ -7,11 +7,14 @@ import com.jfinal.template.source.FileSource;
 import com.tools.gen.entity.Clazz;
 
 public class GenUtils {
+    private static final Engine engine = Engine.create("GenEngine");
+    private static final Template template;
+    static {
+        engine.setDevMode(true);
+        template = engine.getTemplate(new FileSource("resources", "class.tmpl"));
+    }
 
     public static String generate(Clazz clazz) {
-        Engine engine = Engine.create("GenEngine");
-        engine.setDevMode(true);
-        Template template = engine.getTemplate(new FileSource("resources", "class.tmpl"));
         return template.renderToString(Kv.by("clazz", clazz));
     }
 }
