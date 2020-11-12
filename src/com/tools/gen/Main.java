@@ -5,11 +5,12 @@ import com.tools.gen.utils.Logger;
 import com.tools.gen.utils.P8TradeInfoReader;
 
 public class Main {
+    // generate java code base package
+    public static final String basePackage = "com.ccb.test";
+    // trade source
+    public static final String fileName = "P8TradeInfo.txt";
 
     public static void main(String[] args) throws Exception {
-
-        // trade source
-        String fileName = "P8TradeInfo.txt";
 
         // obtain trade info
         P8TradeInfo tradeInfo = P8TradeInfoReader.read("resources/" + fileName);
