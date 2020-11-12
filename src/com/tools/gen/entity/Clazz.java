@@ -38,6 +38,9 @@ public class Clazz {
     // extends
     private String extend;
 
+    // static fields
+    private List<Field> staticFieldList;
+
     // fields
     private List<Field> fieldList;
 
@@ -144,6 +147,14 @@ public class Clazz {
         this.extend = extend;
     }
 
+    public List<Field> getStaticFieldList() {
+        return staticFieldList;
+    }
+
+    public void setStaticFieldList(List<Field> staticFieldList) {
+        this.staticFieldList = staticFieldList;
+    }
+
     public List<Field> getFieldList() {
         return fieldList;
     }
@@ -206,6 +217,7 @@ public class Clazz {
                 ", name='" + name + '\'' +
                 ", implementSet=" + implementSet +
                 ", extend='" + extend + '\'' +
+                ", staticFieldList=" + staticFieldList +
                 ", fieldList=" + fieldList +
                 ", constructorList=" + constructorList +
                 ", staticBlockList=" + staticBlockList +

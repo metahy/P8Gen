@@ -32,6 +32,7 @@ Plan
 - [ ] interface default method
 - [ ] enum about...
 - [ ] annotation about...
+- [x] static fields
 - [x] field notes
 - [x] field annotation
 - [x] field annotation default value

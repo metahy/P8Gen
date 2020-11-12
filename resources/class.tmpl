@@ -13,6 +13,9 @@ import #(imp);
 #end
 #end
 #if(clazz.getVisibility())#(clazz.getVisibility()) #end #if(clazz.isAbstract())abstract #end #if(clazz.isFinal())final #end #if(clazz.isStatic())static #end class #(clazz.getName())#if(clazz.getImplementSet()) implements #for(impl : clazz.getImplementSet())#if(!for.last)#(impl), #else#(impl)#end#end#end#if(clazz.getExtend()) extends #(clazz.getExtend())#end  {
+#for(field : clazz.getStaticFieldList())
+    #if(field.getVisibility())#(field.getVisibility()) #end #if(field.isStatic())static #end #if(field.isFinal())final #end #if(field.isVolatile())volatile #end #(field.getType()) #(field.getName())#if(field.getValue()) = #(field.getValue())#end;
+#end
 #for(field : clazz.getFieldList())
 
 #if(field.getNote())#(field.getNote())#end
