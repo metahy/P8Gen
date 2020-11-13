@@ -17,8 +17,9 @@ public class TestEnjoy {
         Set<String> importSet = new TreeSet<>();
         importSet.add("java.math.*");
         importSet.add("java.text.*");
-        clazz.setImportSet(importSet);
-        clazz.setNote(NoteUtils.multiLine(Arrays.asList("hello"), 0));
+//        clazz.setImportSet(importSet);
+//        clazz.setNote(NoteUtils.multiLine(Arrays.asList("hello"), 0));
+//        clazz.setNote(NoteUtils.singleLine("hello", 0));
         Annotation userAnnotation = new Annotation();
         userAnnotation.setName("Component");
         userAnnotation.setDefaultValue("user");
@@ -31,7 +32,8 @@ public class TestEnjoy {
         annoParam2.setName("value");
         annoParam2.setValue("hi");
         serverAnnotation.setParamList(Arrays.asList(annoParam1, annoParam2));
-        clazz.setAnnotationList(Arrays.asList(userAnnotation, serverAnnotation));
+//        clazz.setAnnotationList(Arrays.asList(userAnnotation, serverAnnotation));
+//        clazz.setAnnotationList(new ArrayList<>());
         clazz.setVisibility("public");
         clazz.setName("User");
         clazz.setAbstract(true);
