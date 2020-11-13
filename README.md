@@ -1,10 +1,12 @@
 ### P8Gen
 ---
-> A tool for generate java code
+A tool for generate java code
 
 Component: *Enjoy Template Engine*
 
-Plan
+> You can update the TestEngine.java to test the java class template.
+
+#### Plan
 
 > About generator 
 - [x] package
@@ -73,181 +75,182 @@ Plan
 
 `How to use`:
 
+1. Write the trade info template(you can reference the `P8TradeInfo.txt`)
+2. Update the Main.java to use you template which defined at step 1.
+3. Update the basePackage in the Main.java(it means where your code will be generated to)
+4. Run the main(). 
+
 ```java
-public class TestEnjoy {
-    public static void main(String[] args) {
-        Clazz clazz = new Clazz();
-        clazz.setPkg("com.test");
-        clazz.setImportList(Arrays.asList("java.math.*", "java.text.*"));
-        clazz.setNote(NoteUtils.multiLine(Arrays.asList("hello"), 0));
-        Annotation userAnnotation = new Annotation();
-        userAnnotation.setName("Component");
-        userAnnotation.setDefaultValue("user");
-        Annotation serverAnnotation = new Annotation();
-        serverAnnotation.setName("Service");
-        Param annoParam1 = new Param();
-        annoParam1.setName("target");
-        annoParam1.setValue("/");
-        Param annoParam2 = new Param();
-        annoParam2.setName("value");
-        annoParam2.setValue("hi");
-        serverAnnotation.setParamList(Arrays.asList(annoParam1, annoParam2));
-        clazz.setAnnotationList(Arrays.asList(userAnnotation, serverAnnotation));
-        clazz.setVisibility("public");
-        clazz.setName("User");
-        clazz.setAbstract(true);
-        clazz.setFinal(true);
-        clazz.setStatic(true);
-        clazz.setImplementList(Arrays.asList("Serialize", "Service"));
-        clazz.setExtend("InVo");
-        Field field1 = new Field();
-        field1.setNote(NoteUtils.singleLine("姓名" ,1));
-        field1.setAnnotationList(Arrays.asList(userAnnotation));
-        field1.setVisibility("private");
-        field1.setType("String");
-        field1.setName("name");
-//        field1.setFinal(true);
-//        field1.setStatic(true);
-//        field1.setVolatile(true);
-//        field1.setValue("\"zhangsan\"");
-        Field field2 = new Field();
-        field2.setNote(NoteUtils.multiLine(Arrays.asList("密码", "@Param password"), 1));
-        field2.setAnnotationList(Arrays.asList(serverAnnotation));
-        field2.setVisibility("private");
-        field2.setType("String");
-        field2.setName("password");
-        clazz.setFieldList(Arrays.asList(field1, field2));
+public class Main {
+    // generate java code base package
+    public static final String basePackage = "com.ccb.fpp.test";
+    // trade source
+    public static final String fileName = "P8TradeInfo.txt";
 
-        Method setName = new Method();
-        setName.setNote(NoteUtils.singleLine("set name", 1));
-        setName.setVisibility("public");
-//        setName.setReturnType("void");
-        setName.setName("setName");
-        Param name = new Param();
-        name.setType("String");
-        name.setName("name");
-        Annotation nameAnno = new Annotation();
-        nameAnno.setName("Param");
-        nameAnno.setDefaultValue("name");
-        name.setAnnotation(nameAnno);
-        setName.setParamList(Collections.singletonList(name));
-        setName.setContent(Indents.method("this.name = name;", 1));
+    public static void main(String[] args) throws Exception {
 
-        Method getName = new Method();
-        getName.setNote(NoteUtils.multiLine(Arrays.asList("get name"), 1));
-        getName.setVisibility("public");
-        getName.setReturnType("String");
-        getName.setName("getName");
-        getName.setContent(Indents.method("return this.name;", 1));
+        // obtain trade info
+        P8TradeInfo tradeInfo = P8TradeInfoReader.read("resources/" + fileName);
+        Logger.info(tradeInfo);
 
-        Method setPassword = new Method();
-        Annotation overrideAnnotation = new Annotation();
-        overrideAnnotation.setName("Override");
-        setPassword.setAnnotationList(Arrays.asList(overrideAnnotation));
-        setPassword.setVisibility("public");
-        setPassword.setReturnType("void");
-        setPassword.setName("setPassword");
-        Param password = new Param();
-        password.setType("String");
-        password.setName("password");
-        Annotation passwordAnno = new Annotation();
-        passwordAnno.setName("Param");
-        passwordAnno.setDefaultValue("password");
-        password.setAnnotation(passwordAnno);
-        setPassword.setParamList(Collections.singletonList(password));
-        setPassword.setContent(Indents.method("this.password = password;", 1));
+        // generate java
+        // TODO
+        System.out.println("----------------------");
+        System.out.println(GenUtils.generate(tradeInfo.getInVo()));
+        System.out.println("----------------------");
 
-        Method getPassword = new Method();
-        getPassword.setNote(NoteUtils.singleLine("get password", 1));
-        getPassword.setAnnotationList(Arrays.asList(overrideAnnotation));
-        getPassword.setVisibility("public");
-        getPassword.setReturnType("String");
-        getPassword.setName("getPassword");
-        getPassword.setContent(Indents.method("return this.password;", 1));
+        // TODO
+        System.out.println("----------------------");
+        System.out.println(GenUtils.generate(tradeInfo.getOutVo()));
+        System.out.println("----------------------");
 
-        Method create = new Method();
-        create.setNote(NoteUtils.multiLine(Arrays.asList("create a new user", "@Param name", "@Param password", "@Return user"), 1));
-        create.setAnnotationList(Arrays.asList(overrideAnnotation));
-        create.setVisibility("public");
-//        create.setStatic(true);
-//        create.setFinal(true);
-//        create.setSynchronized(true);
-        create.setReturnType("User");
-        create.setName("create");
-        create.setParamList(Arrays.asList(name, password));
-        String sb =
-                Indents.method("User user = new User();", 1) +
-                Indents.method("user.setName(name);", 1) +
-                Indents.method("user.setPassword(password);", 1) +
-                Indents.method("return user;", 1);
-        create.setContent(sb);
-        clazz.setMethodList(Arrays.asList(setName, getName, setPassword, getPassword, create));
-
-        System.out.println(GenUtils.generate(clazz));
+        // TODO
+        System.out.println("----------------------");
+        tradeInfo.getGrpList().forEach(c -> System.out.println(GenUtils.generate(c)));
+        System.out.println("----------------------");
     }
 }
 ```
 
 you will see the result like this:
 ```java
-package com.test;
+package com.ccb.fpp.test.business.vo;
 
-import java.math.*;
-import java.text.*;
+import com.ccb.openframework.datatransform.message.TxRequestMsgBodyEntity;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
 
-/**
- * hello
- */
-@Component("user")
-@Service(target = "/", value = "hi")
-public abstract final static class User implements Serialize, Service extends InVo {
+public class A0541T160InVo implements Serializable, TxRequestMsgBodyEntity {
+    private static final long serialVersionUID = 1L;
 
-    // 姓名
-    @Component("user")
-    private String name;
+    private List<PldtpBybkOfr1> pldtpBybkOfr1;
 
-    /**
-     * 密码
-     * @Param password
-     */
-    @Service(target = "/", value = "hi")
-    private String password;
+    // 交易品种编码
+    private String txnVrtyEcd;
 
-    // set name
-    public void setName(@Param("name") String name) {
-        this.name = name;
+    // 交易品种编码
+    private BegDecimal txnVrtyEcd1;
+
+    private List<PldtpBybkOfr2> pldtpBybkOfr2;
+
+    // 回购期限
+    private BegDecimal bybkTrm;
+
+    public void setPldtpBybkOfr1(List<PldtpBybkOfr1> pldtpBybkOfr1) {
+        this.pldtpBybkOfr1 = pldtpBybkOfr1;
     }
 
-    /**
-     * get name
-     */
-    public String getName() {
-        return this.name;
+    public List<PldtpBybkOfr1> getPldtpBybkOfr1() {
+        return pldtpBybkOfr1;
     }
 
-    @Override
-    public void setPassword(@Param("password") String password) {
-        this.password = password;
+    public void setTxnVrtyEcd(String txnVrtyEcd) {
+        this.txnVrtyEcd = txnVrtyEcd;
     }
 
-    // get password
-    @Override
-    public String getPassword() {
-        return this.password;
+    public String getTxnVrtyEcd() {
+        return txnVrtyEcd;
     }
 
-    /**
-     * create a new user
-     * @Param name
-     * @Param password
-     * @Return user
-     */
-    @Override
-    public User create(@Param("name") String name, @Param("password") String password) {
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
-        return user;
+    public void setTxnVrtyEcd1(BegDecimal txnVrtyEcd1) {
+        this.txnVrtyEcd1 = txnVrtyEcd1;
+    }
+
+    public BegDecimal getTxnVrtyEcd1() {
+        return txnVrtyEcd1;
+    }
+
+    public void setPldtpBybkOfr2(List<PldtpBybkOfr2> pldtpBybkOfr2) {
+        this.pldtpBybkOfr2 = pldtpBybkOfr2;
+    }
+
+    public List<PldtpBybkOfr2> getPldtpBybkOfr2() {
+        return pldtpBybkOfr2;
+    }
+
+    public void setBybkTrm(BegDecimal bybkTrm) {
+        this.bybkTrm = bybkTrm;
+    }
+
+    public BegDecimal getBybkTrm() {
+        return bybkTrm;
+    }
+
+}
+
+package com.ccb.fpp.test.business.vo;
+
+import com.ccb.openframework.datatransform.message.TxResponseMsgBodyEntity;
+import java.io.Serializable;
+
+public class A0541T160OutVo implements Serializable, TxResponseMsgBodyEntity {
+    private static final long serialVersionUID = 1L;
+
+    // 启用标志
+    private String strusind;
+
+    public void setStrusind(String strusind) {
+        this.strusind = strusind;
+    }
+
+    public String getStrusind() {
+        return strusind;
+    }
+
+}
+
+package com.ccb.fpp.test.business.vo;
+
+import java.math.BigDecimal;
+
+public class PldtpBybkOfr1 {
+
+    private String mdlDt;
+
+    private BegDecimal mdlTm;
+
+    public void setMdlDt(String mdlDt) {
+        this.mdlDt = mdlDt;
+    }
+
+    public String getMdlDt() {
+        return mdlDt;
+    }
+
+    public void setMdlTm(BegDecimal mdlTm) {
+        this.mdlTm = mdlTm;
+    }
+
+    public BegDecimal getMdlTm() {
+        return mdlTm;
+    }
+
+}
+package com.ccb.fpp.test.business.vo;
+
+import java.math.BigDecimal;
+
+public class PldtpBybkOfr2 {
+
+    private BegDecimal wair;
+
+    private String ltstIntrt;
+
+    public void setWair(BegDecimal wair) {
+        this.wair = wair;
+    }
+
+    public BegDecimal getWair() {
+        return wair;
+    }
+
+    public void setLtstIntrt(String ltstIntrt) {
+        this.ltstIntrt = ltstIntrt;
+    }
+
+    public String getLtstIntrt() {
+        return ltstIntrt;
     }
 
 }
