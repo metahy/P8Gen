@@ -6,7 +6,6 @@ import com.tools.gen.entity.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.math.BigDecimal;
 import java.util.*;
 
 public class P8TradeInfoReader {
@@ -129,7 +128,6 @@ public class P8TradeInfoReader {
             for (String line : lines) {
                 String[] ss = line.split("\t");
                 if ("Group".equals(ss[4])) {
-                    // importSet.add(Main.basePackage + ".business.vo." + CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length()-4)));
                     importSet.add("java.util.List");
                     fieldsLine = new ArrayList<>();
                     fieldsLine.add(line);
@@ -172,21 +170,25 @@ public class P8TradeInfoReader {
 
         List<Field> fieldLists = new ArrayList<>();
         List<Method> methodList = new ArrayList<>();
+        List<Clazz> groList = new ArrayList<>();
 
         // deal field lines list
         if (fieldLinesList.size() > 0) {
             for (List<String> fieldLines : fieldLinesList) {
                 // class's String/BigDecimal field
+                String[] ss = fieldLines.get(0).split("\t");
+                Field field;
                 if (fieldLines.size() == 1) {
-                    String[] ss = fieldLines.get(0).split("\t");
-                    Field field = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
-                    fieldLists.add(field);
-                    methodList.addAll(genGetterAndSetter(tradeInfo, field));
+                    field = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 }
                 // class's class field
                 else {
-
+                    String fieldClassName = CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4));
+                    field = new Field().setVisibility("private").setType("List<" + fieldClassName + ">").setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1));
+                    groList.add(genGrpList(tradeInfo, field, fieldLines));
                 }
+                fieldLists.add(field);
+                methodList.addAll(genGetterAndSetter(tradeInfo, field));
             }
         }
 
@@ -194,6 +196,7 @@ public class P8TradeInfoReader {
         // TODO Override toString
 
         inVo.setMethodList(methodList);
+        tradeInfo.setGrpList(groList);
 
         // TODO
         tradeInfo.setInVo(inVo);
@@ -230,12 +233,44 @@ public class P8TradeInfoReader {
         getter.setVisibility("public");
         getter.setReturnType(field.getType());
         getter.setName("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
-        getter.setContent(Indents.method("return this." + field.getName() + ";", 1));
+        getter.setContent(Indents.method("return " + field.getName() + ";", 1));
 
         methodList.add(setter);
         methodList.add(getter);
 
         return methodList;
+    }
+
+    private static Clazz genGrpList(P8TradeInfo tradeInfo, Field field, List<String> fieldLines) {
+        Clazz clazz = new Clazz();
+        clazz.setPkg(Main.basePackage + ".business.vo");
+        Set<String> importSet = new TreeSet<>();
+
+        clazz.setVisibility("public");
+        clazz.setName(field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+
+        List<Field> fieldLists = new ArrayList<>();
+        List<Method> methodList = new ArrayList<>();
+
+        Field innerField;
+        for (int i = 1; i < fieldLines.size(); i++) {
+            String fieldLine = fieldLines.get(i);
+            String[] ss = fieldLine.split("\t");
+            if ("N".equals(ss[4])) {
+                importSet.add("java.math.BigDecimal");
+            }
+            innerField = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+            fieldLists.add(innerField);
+            methodList.addAll(genGetterAndSetter(tradeInfo, innerField));
+        }
+
+        clazz.setImportSet(importSet);
+
+        clazz.setFieldList(fieldLists);
+        // TODO Override toString
+
+        clazz.setMethodList(methodList);
+        return clazz;
     }
 
 }
