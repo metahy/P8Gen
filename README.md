@@ -64,12 +64,12 @@ Plan
 
 > About trade
 - [ ] trade reader
-- [ ] inVo
-- [ ] outVo
+- [x] inVo
+- [x] outVo
 - [ ] service
 - [ ] service implement
 - [ ] data transform xml
-- [ ] other class in inVo or outVo
+- [x] other class in inVo or outVo
 
 `How to use`:
 
