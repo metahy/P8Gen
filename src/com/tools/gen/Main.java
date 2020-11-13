@@ -8,7 +8,7 @@ import sun.rmi.runtime.Log;
 
 public class Main {
     // generate java code base package
-    public static final String basePackage = "com.ccb.test";
+    public static final String basePackage = "com.ccb.fpp.test";
     // trade source
     public static final String fileName = "P8TradeInfo.txt";
 
@@ -20,10 +20,14 @@ public class Main {
 
         // generate java
         // TODO
-        Logger.info(GenUtils.generate(tradeInfo.getInVo()));
+        System.out.println("----------------------");
+        System.out.println(GenUtils.generate(tradeInfo.getInVo()));
+        System.out.println("----------------------");
 
         // generate xml
         // TODO
-        Logger.info(GenUtils.generate(tradeInfo.getOutVo()));
+        System.out.println("----------------------");
+        System.out.println(GenUtils.generate(tradeInfo.getOutVo()));
+        System.out.println("----------------------");
     }
 }
