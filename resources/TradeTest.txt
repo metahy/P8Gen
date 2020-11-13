@@ -6,10 +6,6 @@ TEST_ABC_GRP				Group
 ..MDL_TM	成交时间	103549		C
 ..LTST_PRC	成交价格	103549		N
 TXN_VRTY_ECD	交易品种编码	120958		C
-TEST_ABC_GRP				Group
-..MDL_DT	成交日期	102830		C
-..LTST_PRC	最新价格	103549		N
-..MDL_PRC	成交价格	103549		N
 BYBK_TRM	回购期限	103348		N
 ---
 StrUsInd	启用标志	128683	1	C
