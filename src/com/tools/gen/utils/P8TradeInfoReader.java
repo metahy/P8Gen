@@ -230,7 +230,7 @@ public class P8TradeInfoReader {
     private static void dealFieldListAndMethodList(P8TradeInfo tradeInfo, List<Field> fieldLists, List<Method> methodList, List<List<String>> fieldLinesList) {
         // deal field lines list
         if (fieldLinesList.size() > 0) {
-            A : for (List<String> fieldLines : fieldLinesList) {
+            for (List<String> fieldLines : fieldLinesList) {
                 // class's String/BigDecimal field
                 String[] ss = fieldLines.get(0).split("\t");
 
@@ -238,13 +238,8 @@ public class P8TradeInfoReader {
                 if (fieldLists.size() > 0) {
                     for (Field forField : fieldLists) {
 
-                        String fieldName;
-                        if (fieldLines.size() == 1) {
-                            fieldName = CamelCaseUtils.toSmallCamelCase(ss[0]);
-                        } else {
-                            fieldName = CamelCaseUtils.toSmallCamelCase(ss[0]);
-                            fieldName = fieldName.substring(0, fieldName.length() - 3);
-                        }
+                        String fieldName = CamelCaseUtils.toSmallCamelCase(ss[0]);
+                        if (fieldLines.size() != 1) fieldName = fieldName.substring(0, fieldName.length() - 3);
 
                         if (forField.getName().equals(fieldName)) {
                             throw new RuntimeException("Duplicated field [" + ss[0] + "] in same vo, Please check the trade info.");
@@ -253,8 +248,8 @@ public class P8TradeInfoReader {
                 }
 
                 Field field;
-                if (fieldLines.size() == 1) {
-                    field = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                if (!"Group".equals(ss[4])) {
+                    field = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 }
                 // class's class field
                 else {
