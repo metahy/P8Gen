@@ -1,5 +1,5 @@
 package #(clazz.getPkg());
-#if(clazz.getImportSet())
+#if(clazz.getImportSet() && clazz.getImportSet().size() > 0)
 
 #for(imp : clazz.getImportSet())
 import #(imp);
