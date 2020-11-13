@@ -31,86 +31,85 @@ public class Field {
     // default value
     private String value;
 
-    public Field() {
-    }
-
-    public Field(String visibility, String type, String name, String note) {
-        this.visibility = visibility;
-        this.type = type;
-        this.name = name;
-        this.note = note;
-    }
-
     public String getNote() {
         return note;
     }
 
-    public void setNote(String note) {
+    public Field setNote(String note) {
         this.note = note;
+        return this;
     }
 
     public List<Annotation> getAnnotationList() {
         return annotationList;
     }
 
-    public void setAnnotationList(List<Annotation> annotationList) {
+    public Field setAnnotationList(List<Annotation> annotationList) {
         this.annotationList = annotationList;
+        return this;
     }
 
     public String getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(String visibility) {
+    public Field setVisibility(String visibility) {
         this.visibility = visibility;
+        return this;
     }
 
     public boolean isStatic() {
         return isStatic;
     }
 
-    public void setStatic(boolean aStatic) {
+    public Field setStatic(boolean aStatic) {
         isStatic = aStatic;
+        return this;
     }
 
     public boolean isFinal() {
         return isFinal;
     }
 
-    public void setFinal(boolean aFinal) {
+    public Field setFinal(boolean aFinal) {
         isFinal = aFinal;
+        return this;
     }
 
     public boolean isVolatile() {
         return isVolatile;
     }
 
-    public void setVolatile(boolean aVolatile) {
+    public Field setVolatile(boolean aVolatile) {
         isVolatile = aVolatile;
+        return this;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public Field setType(String type) {
         this.type = type;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Field setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public Field setValue(String value) {
         this.value = value;
+        return this;
     }
 
     @Override
