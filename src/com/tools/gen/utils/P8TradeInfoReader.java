@@ -122,36 +122,7 @@ public class P8TradeInfoReader {
         importSet.add("com.ccb.openframework.datatransform.message.TxRequestMsgBodyEntity");
         importSet.add("java.io.Serializable");
 
-        List<List<String>> fieldLinesList = new ArrayList<>();
-        List<String> fieldsLine = null;
-        if (lines.size() > 0) {
-            for (String line : lines) {
-                String[] ss = line.split("\t");
-                if ("Group".equals(ss[4])) {
-                    importSet.add("java.util.List");
-                    fieldsLine = new ArrayList<>();
-                    fieldsLine.add(line);
-                } else if (ss[0].startsWith("..")) {
-                    if (fieldsLine != null) {
-                        fieldsLine.add(line);
-                    }
-                } else {
-                    if (fieldsLine != null) {
-                        fieldLinesList.add(fieldsLine);
-                    }
-                    fieldsLine = new ArrayList<>();
-                    fieldsLine.add(line);
-                    if ("N".equals(ss[4])) {
-                        importSet.add("java.math.BigDecimal");
-                    }
-                    fieldLinesList.add(fieldsLine);
-                    fieldsLine = null;
-                }
-            }
-            if (fieldsLine != null) {
-                fieldLinesList.add(fieldsLine);
-            }
-        }
+        List<List<String>> fieldLinesList = getFieldLinesListAndImportSet(lines, importSet);
 
         inVo.setImportSet(importSet);
         inVo.setVisibility("public");
@@ -162,10 +133,7 @@ public class P8TradeInfoReader {
         inVo.setImplementSet(implementSet);
 
         List<Field> staticFieldLists = new ArrayList<>();
-        Field serialVersionUID = new Field()
-                .setVisibility("private").setStatic(true).setFinal(true)
-                .setType("long").setName("serialVersionUID").setValue("1L");
-        staticFieldLists.add(serialVersionUID);
+        staticFieldLists.add(getSerialVersionUID());
         inVo.setStaticFieldList(staticFieldLists);
 
         List<Field> fieldLists = new ArrayList<>();
@@ -173,25 +141,7 @@ public class P8TradeInfoReader {
         List<Clazz> grpList = new ArrayList<>();
         tradeInfo.setGrpList(grpList);
 
-        // deal field lines list
-        if (fieldLinesList.size() > 0) {
-            for (List<String> fieldLines : fieldLinesList) {
-                // class's String/BigDecimal field
-                String[] ss = fieldLines.get(0).split("\t");
-                Field field;
-                if (fieldLines.size() == 1) {
-                    field = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
-                }
-                // class's class field
-                else {
-                    String fieldClassName = CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4));
-                    field = new Field().setVisibility("private").setType("List<" + fieldClassName + ">").setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1));
-                    genGrpList(tradeInfo, field, fieldLines);
-                }
-                fieldLists.add(field);
-                methodList.addAll(genGetterAndSetter(tradeInfo, field));
-            }
-        }
+        dealFieldListAndMethodList(tradeInfo, fieldLists, methodList, fieldLinesList);
 
         inVo.setFieldList(fieldLists);
         // TODO Override toString
@@ -209,6 +159,35 @@ public class P8TradeInfoReader {
         importSet.add("com.ccb.openframework.datatransform.message.TxResponseMsgBodyEntity");
         importSet.add("java.io.Serializable");
 
+        List<List<String>> fieldLinesList = getFieldLinesListAndImportSet(lines, importSet);
+
+        outVo.setImportSet(importSet);
+        outVo.setVisibility("public");
+        outVo.setName(tradeInfo.getTradeCd() + "OutVo");
+        Set<String> implementSet = new TreeSet<>();
+        implementSet.add("Serializable");
+        implementSet.add("TxResponseMsgBodyEntity");
+        outVo.setImplementSet(implementSet);
+
+        List<Field> staticFieldLists = new ArrayList<>();
+        staticFieldLists.add(getSerialVersionUID());
+        outVo.setStaticFieldList(staticFieldLists);
+
+        List<Field> fieldLists = new ArrayList<>();
+        List<Method> methodList = new ArrayList<>();
+
+        dealFieldListAndMethodList(tradeInfo, fieldLists, methodList, fieldLinesList);
+
+        outVo.setFieldList(fieldLists);
+        // TODO Override toString
+
+        outVo.setMethodList(methodList);
+
+        // TODO
+        tradeInfo.setOutVo(outVo);
+    }
+
+    private static List<List<String>> getFieldLinesListAndImportSet(List<String> lines, Set<String> importSet) {
         List<List<String>> fieldLinesList = new ArrayList<>();
         List<String> fieldsLine = null;
         if (lines.size() > 0) {
@@ -239,26 +218,16 @@ public class P8TradeInfoReader {
                 fieldLinesList.add(fieldsLine);
             }
         }
+        return fieldLinesList;
+    }
 
-        outVo.setImportSet(importSet);
-        outVo.setVisibility("public");
-        outVo.setName(tradeInfo.getTradeCd() + "OutVo");
-        Set<String> implementSet = new TreeSet<>();
-        implementSet.add("Serializable");
-        implementSet.add("TxResponseMsgBodyEntity");
-        outVo.setImplementSet(implementSet);
-
-        List<Field> staticFieldLists = new ArrayList<>();
-        Field serialVersionUID = new Field()
+    private static Field getSerialVersionUID() {
+        return new Field()
                 .setVisibility("private").setStatic(true).setFinal(true)
                 .setType("long").setName("serialVersionUID").setValue("1L");
-        staticFieldLists.add(serialVersionUID);
-        outVo.setStaticFieldList(staticFieldLists);
+    }
 
-        List<Field> fieldLists = new ArrayList<>();
-        List<Method> methodList = new ArrayList<>();
-        List<Clazz> grpList = tradeInfo.getGrpList();
-
+    private static void dealFieldListAndMethodList(P8TradeInfo tradeInfo, List<Field> fieldLists, List<Method> methodList, List<List<String>> fieldLinesList) {
         // deal field lines list
         if (fieldLinesList.size() > 0) {
             for (List<String> fieldLines : fieldLinesList) {
@@ -275,46 +244,9 @@ public class P8TradeInfoReader {
                     genGrpList(tradeInfo, field, fieldLines);
                 }
                 fieldLists.add(field);
-                methodList.addAll(genGetterAndSetter(tradeInfo, field));
+                methodList.addAll(genGetterAndSetter(field));
             }
         }
-
-        outVo.setFieldList(fieldLists);
-        // TODO Override toString
-
-        outVo.setMethodList(methodList);
-
-        // TODO
-        tradeInfo.setOutVo(outVo);
-    }
-
-    private static List<Method> genGetterAndSetter(P8TradeInfo tradeInfo, Field field) {
-        List<Method> methodList = new ArrayList<>();
-
-        // gen setter
-        Method setter = new Method();
-        setter.setVisibility("public");
-        setter.setReturnType("void");
-        setter.setName("set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
-        List<Param> paramList = new ArrayList<>();
-        Param param = new Param();
-        param.setType(field.getType());
-        param.setName(field.getName());
-        paramList.add(param);
-        setter.setParamList(paramList);
-        setter.setContent(Indents.method("this." + field.getName() + " = " + field.getName() + ";", 1));
-
-        // gen getter
-        Method getter = new Method();
-        getter.setVisibility("public");
-        getter.setReturnType(field.getType());
-        getter.setName("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
-        getter.setContent(Indents.method("return " + field.getName() + ";", 1));
-
-        methodList.add(setter);
-        methodList.add(getter);
-
-        return methodList;
     }
 
     private static void genGrpList(P8TradeInfo tradeInfo, Field field, List<String> fieldLines) {
@@ -356,7 +288,7 @@ public class P8TradeInfoReader {
                 }
                 innerField = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
-                methodList.addAll(genGetterAndSetter(tradeInfo, innerField));
+                methodList.addAll(genGetterAndSetter(innerField));
             }
 
         } else {
@@ -379,7 +311,7 @@ public class P8TradeInfoReader {
                 }
                 innerField = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
-                methodList.addAll(genGetterAndSetter(tradeInfo, innerField));
+                methodList.addAll(genGetterAndSetter(innerField));
             }
 
             clazz.setImportSet(importSet);
@@ -392,4 +324,32 @@ public class P8TradeInfoReader {
         }
     }
 
+    private static List<Method> genGetterAndSetter(Field field) {
+        List<Method> methodList = new ArrayList<>();
+
+        // gen setter
+        Method setter = new Method();
+        setter.setVisibility("public");
+        setter.setReturnType("void");
+        setter.setName("set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+        List<Param> paramList = new ArrayList<>();
+        Param param = new Param();
+        param.setType(field.getType());
+        param.setName(field.getName());
+        paramList.add(param);
+        setter.setParamList(paramList);
+        setter.setContent(Indents.method("this." + field.getName() + " = " + field.getName() + ";", 1));
+
+        // gen getter
+        Method getter = new Method();
+        getter.setVisibility("public");
+        getter.setReturnType(field.getType());
+        getter.setName("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+        getter.setContent(Indents.method("return " + field.getName() + ";", 1));
+
+        methodList.add(setter);
+        methodList.add(getter);
+
+        return methodList;
+    }
 }
