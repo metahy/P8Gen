@@ -206,8 +206,10 @@ import java.math.BigDecimal;
 
 public class PldtpBybkOfr1 {
 
+    // 成交日期
     private String mdlDt;
 
+    // 成交时间
     private BegDecimal mdlTm;
 
     public void setMdlDt(String mdlDt) {
@@ -233,8 +235,10 @@ import java.math.BigDecimal;
 
 public class PldtpBybkOfr2 {
 
+    // 加权平均利率
     private BegDecimal wair;
 
+    // 最新利率
     private String ltstIntrt;
 
     public void setWair(BegDecimal wair) {
