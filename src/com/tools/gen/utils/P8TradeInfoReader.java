@@ -163,13 +163,9 @@ public class P8TradeInfoReader {
         implementSet.add("TxRequestMsgBodyEntity");
         inVo.setImplementSet(implementSet);
         List<Field> fields = new ArrayList<>();
-        Field serialVersionUID = new Field();
-        serialVersionUID.setVisibility("private");
-        serialVersionUID.setStatic(true);
-        serialVersionUID.setFinal(true);
-        serialVersionUID.setType("long");
-        serialVersionUID.setName("serialVersionUID");
-        serialVersionUID.setValue("1L");
+        Field serialVersionUID = new Field()
+                .setVisibility("private").setStatic(true).setFinal(true)
+                .setType("long").setName("serialVersionUID").setValue("1L");
         fields.add(serialVersionUID);
         inVo.setStaticFieldList(fields);
 
