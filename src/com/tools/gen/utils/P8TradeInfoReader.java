@@ -300,11 +300,10 @@ public class P8TradeInfoReader {
                 if ("N".equals(ss[4])) {
                     importSet.add("java.math.BigDecimal");
                 }
-                innerField = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
                 methodList.addAll(genGetterAndSetter(innerField));
             }
-
         } else {
             clazz = new Clazz();
             clazz.setPkg(Main.basePackage + ".business.vo");
@@ -323,7 +322,7 @@ public class P8TradeInfoReader {
                 if ("N".equals(ss[4])) {
                     importSet.add("java.math.BigDecimal");
                 }
-                innerField = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
                 methodList.addAll(genGetterAndSetter(innerField));
             }
