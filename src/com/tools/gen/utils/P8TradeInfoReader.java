@@ -230,9 +230,28 @@ public class P8TradeInfoReader {
     private static void dealFieldListAndMethodList(P8TradeInfo tradeInfo, List<Field> fieldLists, List<Method> methodList, List<List<String>> fieldLinesList) {
         // deal field lines list
         if (fieldLinesList.size() > 0) {
-            for (List<String> fieldLines : fieldLinesList) {
+            A : for (List<String> fieldLines : fieldLinesList) {
                 // class's String/BigDecimal field
                 String[] ss = fieldLines.get(0).split("\t");
+
+                // check if exist
+                if (fieldLists.size() > 0) {
+                    for (Field forField : fieldLists) {
+
+                        String fieldName;
+                        if (fieldLines.size() == 1) {
+                            fieldName = CamelCaseUtils.toSmallCamelCase(ss[0]);
+                        } else {
+                            fieldName = CamelCaseUtils.toSmallCamelCase(ss[0]);
+                            fieldName = fieldName.substring(0, fieldName.length() - 3);
+                        }
+
+                        if (forField.getName().equals(fieldName)) {
+                            throw new RuntimeException("Duplicated field [" + ss[0] + "] in same vo, Please check the trade info.");
+                        }
+                    }
+                }
+
                 Field field;
                 if (fieldLines.size() == 1) {
                     field = new Field().setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
