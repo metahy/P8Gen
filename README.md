@@ -74,6 +74,9 @@ Component: *Enjoy Template Engine*
 - [ ] data transform xml
 - [x] other class in inVo or outVo
 
+> About GenUtils
+- [ ] use strategy pattern
+
 `How to use`:
 
 1. Write the trade info template(you can reference the `P8TradeInfo.txt`)
