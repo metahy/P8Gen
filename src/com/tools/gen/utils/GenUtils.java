@@ -11,7 +11,7 @@ public class GenUtils {
     private static final Template template;
     static {
         engine.setDevMode(true);
-        template = engine.getTemplate(new FileSource("resources", "class.tmpl"));
+        template = engine.getTemplate(new FileSource("resources", "templates/class.tmpl"));
     }
 
     public static String generate(Clazz clazz) {
