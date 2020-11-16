@@ -21,7 +21,7 @@ import #(imp);
     @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
     #end
     #end
-    #if(field.getVisibility())#(field.getVisibility()) #end #if(field.isStatic())static #end #if(field.isFinal())final #end #if(field.isVolatile())volatile #end #(field.getType()) #(field.getName())#if(field.getValue()) = #(field.getValue())#end;
+    #(field.getType()) #(field.getName())#if(field.getValue()) = #(field.getValue())#end;
 #end
 #for(method : interface.getEmptyMethodList())
 
@@ -45,7 +45,6 @@ import #(imp);
     default #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end) {#(method.getContent())
     }
 #end
-
 #for(method : interface.getStaticMethodList())
 
 #if(method.getNote())#(method.getNote())#end
@@ -54,7 +53,7 @@ import #(imp);
     @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
     #end
     #end
-    #if(method.isStatic())static #end #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end) {#(method.getContent())
+    static #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end) {#(method.getContent())
     }
 #end
 
