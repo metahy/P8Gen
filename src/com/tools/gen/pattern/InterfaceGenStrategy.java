@@ -20,6 +20,9 @@ public class InterfaceGenStrategy extends GenStrategy <Interface> {
 
     @Override
     public String generate(Interface interFace) {
+        if (interFace == null) {
+            return "interface is null, please check.";
+        }
         return template.renderToString(Kv.by("interface", interFace));
     }
 }

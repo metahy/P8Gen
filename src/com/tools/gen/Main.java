@@ -30,25 +30,29 @@ public class Main {
         System.out.println("----------------------");
         System.out.println(clazzGenContent.generate(tradeInfo.getInVo()));
         System.out.println("----------------------");
+        System.out.println();
 
         // TODO
         System.out.println("----------------------");
         System.out.println(clazzGenContent.generate(tradeInfo.getOutVo()));
         System.out.println("----------------------");
+        System.out.println();
 
         // TODO
         System.out.println("----------------------");
         tradeInfo.getGrpList().forEach(c -> System.out.println(clazzGenContent.generate(c)));
         System.out.println("----------------------");
+        System.out.println();
 
         // TODO
-//        System.out.println("----------------------");
-//        System.out.println(interfaceGenContent.generate(tradeInfo.getService()));
-//        System.out.println("----------------------");
+        System.out.println("----------------------");
+        System.out.println(interfaceGenContent.generate(tradeInfo.getService()));
+        System.out.println("----------------------");
+        System.out.println();
 
         // TODO
-//        System.out.println("----------------------");
-//        System.out.println(clazzGenContent.generate(tradeInfo.getServiceImpl()));
-//        System.out.println("----------------------");
+        System.out.println("----------------------");
+        System.out.println(clazzGenContent.generate(tradeInfo.getServiceImpl()));
+        System.out.println("----------------------");
     }
 }

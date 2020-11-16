@@ -20,6 +20,9 @@ public class ClazzGenStrategy extends GenStrategy <Clazz> {
 
     @Override
     public String generate(Clazz clazz) {
+        if (clazz == null) {
+            return "clazz is null, please check.";
+        }
         return template.renderToString(Kv.by("clazz", clazz));
     }
 }
