@@ -26,6 +26,7 @@ Component: *Enjoy Template Engine*
 - [ ] static blocks
 - [ ] blocks
 - [ ] constructs(empty and with param)
+- [ ] abstract class(class should contain abstract method)
 - [ ] interface
 - [ ] interface implements
 - [ ] interface extends(multi)
