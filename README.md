@@ -1,11 +1,14 @@
-### P8Gen
----
-A tool for generate code
+# P8Gen 
+![P8Gen](resources/images/P8GenLogoWithName.jpg)
 
-![GitHub repo size](https://img.shields.io/github/repo-size/hiramjoyce/P8Gen)
+![Build Passing](https://img.shields.io/badge/build-passing-brightgreen)
+![License MIT](https://img.shields.io/badge/license-MIT-blue)
 ![Enjoy Template Engine](https://img.shields.io/badge/EnjoyTemplateEngine-4.9.02-green)
+![GitHub repo size](https://img.shields.io/github/repo-size/hiramjoyce/P8Gen)
 
-> You can update the TestEngine.java to test the java class template.
+`P8Gen` is a code generator.
+
+> Test*.java is example to use P8Gen tool for you.
 
 #### Plan
 
