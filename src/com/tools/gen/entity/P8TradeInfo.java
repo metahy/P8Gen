@@ -8,7 +8,7 @@ public class P8TradeInfo {
     private Clazz inVo;
     private Clazz outVo;
     private List<Clazz> grpList;
-    private Clazz service;
+    private Interface service;
     private Clazz serviceImpl;
 
     public String getTradeCd() {
@@ -51,11 +51,11 @@ public class P8TradeInfo {
         this.grpList = grpList;
     }
 
-    public Clazz getService() {
+    public Interface getService() {
         return service;
     }
 
-    public void setService(Clazz service) {
+    public void setService(Interface service) {
         this.service = service;
     }
 

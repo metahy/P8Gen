@@ -14,11 +14,17 @@ public class Interface {
     // notes
     private String note;
 
+    // annotations
+    private List<Annotation> annotationList;
+
+    // visibility
+    private String visibility;
+
     // class name
     private String name;
 
     // implements
-    private Set<String> extendsList;
+    private Set<String> extendsSet;
 
     // fields
     private List<Field> fieldList;
@@ -59,6 +65,22 @@ public class Interface {
         return this;
     }
 
+    public List<Annotation> getAnnotationList() {
+        return annotationList;
+    }
+
+    public void setAnnotationList(List<Annotation> annotationList) {
+        this.annotationList = annotationList;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
     public String getName() {
         return name;
     }
@@ -68,13 +90,12 @@ public class Interface {
         return this;
     }
 
-    public Set<String> getExtendsList() {
-        return extendsList;
+    public Set<String> getExtendsSet() {
+        return extendsSet;
     }
 
-    public Interface setExtendsList(Set<String> extendsList) {
-        this.extendsList = extendsList;
-        return this;
+    public void setExtendsSet(Set<String> extendsSet) {
+        this.extendsSet = extendsSet;
     }
 
     public List<Field> getFieldList() {
@@ -119,8 +140,10 @@ public class Interface {
                 "pkg='" + pkg + '\'' +
                 ", importSet=" + importSet +
                 ", note='" + note + '\'' +
+                ", annotationList=" + annotationList +
+                ", visibility='" + visibility + '\'' +
                 ", name='" + name + '\'' +
-                ", extendsList=" + extendsList +
+                ", extendsSet=" + extendsSet +
                 ", fieldList=" + fieldList +
                 ", emptyMethodList=" + emptyMethodList +
                 ", defaultMethodList=" + defaultMethodList +

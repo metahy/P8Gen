@@ -1,0 +1,60 @@
+package #(interface.getPkg());
+#if(interface.getImportSet() && interface.getImportSet().size() > 0)
+
+#for(imp : interface.getImportSet())
+import #(imp);
+#end
+#end
+
+#if(interface.getNote())#(interface.getNote())#end
+#if(interface.getAnnotationList())
+#for(annotation : interface.getAnnotationList())
+@#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+#end
+#end
+#if(interface.getVisibility())#(interface.getVisibility()) #end interface #(interface.getName())#if(interface.getExtendsSet()) extends #for(ext : interface.getExtendsSet())#if(!for.last)#(ext), #else#(ext)#end#end#end  {
+#for(field : interface.getFieldList())
+
+#if(field.getNote())#(field.getNote())#end
+    #if(field.getAnnotationList())
+    #for(annotation : field.getAnnotationList())
+    @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+    #end
+    #end
+    #(field.getType()) #(field.getName())#if(field.getValue()) = #(field.getValue())#end;
+#end
+#for(method : interface.getEmptyMethodList())
+
+#if(method.getNote())#(method.getNote())#end
+    #if(method.getAnnotationList())
+    #for(annotation : method.getAnnotationList())
+    @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+    #end
+    #end
+    #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end);
+
+#end
+#for(method : interface.getDefaultMethodList())
+
+#if(method.getNote())#(method.getNote())#end
+    #if(method.getAnnotationList())
+    #for(annotation : method.getAnnotationList())
+    @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+    #end
+    #end
+    default #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end) {#(method.getContent())
+    }
+#end
+#for(method : interface.getStaticMethodList())
+
+#if(method.getNote())#(method.getNote())#end
+    #if(method.getAnnotationList())
+    #for(annotation : method.getAnnotationList())
+    @#(annotation.getName())#if(annotation.getDefaultValue())("#(annotation.getDefaultValue())")#elseif(annotation.getParamList())(#for(param : annotation.getParamList())#if(!for.last)#(param.getName()) = "#(param.getValue())", #else#(param.getName()) = "#(param.getValue())"#end#end)#end
+    #end
+    #end
+    static #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end) {#(method.getContent())
+    }
+#end
+
+}
