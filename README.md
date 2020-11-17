@@ -5,8 +5,6 @@ A tool for generate code
 ![GitHub repo size](https://img.shields.io/github/repo-size/hiramjoyce/P8Gen)
 ![Enjoy Template Engine](https://img.shields.io/badge/EnjoyTemplateEngine-4.9.02-green)
 
-Component: *Enjoy Template Engine*
-
 > You can update the TestEngine.java to test the java class template.
 
 #### Plan
