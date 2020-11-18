@@ -73,13 +73,13 @@
 - [ ] trade reader
 - [x] inVo
 - [x] outVo
-- [ ] service
-- [ ] service implement
+- [x] service
+- [x] service implement
 - [ ] data transform xml
 - [x] other class in inVo or outVo
 
 > About GenUtils
-- [ ] use strategy pattern
+- [x] use strategy pattern
 
 `How to use`:
 
