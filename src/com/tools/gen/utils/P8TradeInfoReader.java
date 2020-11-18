@@ -33,6 +33,11 @@ public class P8TradeInfoReader {
         // deal trade outVo
         genAndSetOutVo(tradeInfo, outVoLines);
 
+        // deal service
+        genAndSetService(tradeInfo);
+
+        // deal serviceImpl
+        genAndSetServiceImpl(tradeInfo);
         return tradeInfo;
     }
 
@@ -145,10 +150,8 @@ public class P8TradeInfoReader {
 
         inVo.setFieldList(fieldLists);
         // TODO Override toString
-
         inVo.setMethodList(methodList);
 
-        // TODO
         tradeInfo.setInVo(inVo);
     }
 
@@ -180,10 +183,8 @@ public class P8TradeInfoReader {
 
         outVo.setFieldList(fieldLists);
         // TODO Override toString
-
         outVo.setMethodList(methodList);
 
-        // TODO
         tradeInfo.setOutVo(outVo);
     }
 
@@ -364,5 +365,100 @@ public class P8TradeInfoReader {
         methodList.add(getter);
 
         return methodList;
+    }
+
+    private static void genAndSetService(P8TradeInfo tradeInfo) {
+        Interface service = new Interface();
+        service.setPkg(Main.basePackage + ".business.service");
+
+        Set<String> importSet = new TreeSet<>();
+        importSet.add("com.ccb.openframework.datatransform.message.TxRequestMsg");
+        importSet.add(Main.basePackage + ".business.vo." + tradeInfo.getTradeCd() + "OutVo");
+        service.setImportSet(importSet);
+
+        service.setVisibility("public");
+        service.setName(tradeInfo.getTradeCd() + "Service");
+
+        List<Method> methodList = new ArrayList<>();
+        Method method = new Method();
+        method.setReturnType(tradeInfo.getTradeCd() + "OutVo");
+        method.setName("doService");
+        List<Param> paramList = new ArrayList<>();
+        Param param = new Param();
+        param.setType("TxRequestMsg");
+        param.setName("txRequestMsg");
+        paramList.add(param);
+        method.setParamList(paramList);
+        methodList.add(method);
+        service.setEmptyMethodList(methodList);
+
+        tradeInfo.setService(service);
+    }
+
+    private static void genAndSetServiceImpl(P8TradeInfo tradeInfo) {
+        Clazz serviceImpl = new Clazz();
+        serviceImpl.setPkg(Main.basePackage + ".business.service.impl");
+
+        Set<String> importSet = new TreeSet<>();
+        importSet.add("org.springframework.stereotype.Component");
+        importSet.add(Main.basePackage + ".business.service." + tradeInfo.getTradeCd() + "Service");
+        importSet.add(Main.basePackage + ".business.vo." + tradeInfo.getTradeCd() + "InVo");
+        importSet.add(Main.basePackage + ".business.vo." + tradeInfo.getTradeCd() + "OutVo");
+        importSet.add("com.ccb.openframework.datatransform.message.TxRequestMsg");
+        importSet.add("com.ccb.openframework.log.Log");
+        importSet.add("com.ccb.openframework.log.LogFactory");
+        serviceImpl.setImportSet(importSet);
+
+        List<Annotation> annotationList = new ArrayList<>();
+        Annotation annotation = new Annotation();
+        annotation.setName("Component");
+        annotation.setDefaultValue(tradeInfo.getTradeCd().substring(0, 1).toLowerCase() + tradeInfo.getTradeCd().substring(1) + "ServiceImpl");
+        annotationList.add(annotation);
+        serviceImpl.setAnnotationList(annotationList);
+
+        serviceImpl.setVisibility("public");
+        serviceImpl.setName(tradeInfo.getTradeCd() + "ServiceImpl");
+
+        Set<String> implementSet = new TreeSet<>();
+        implementSet.add(tradeInfo.getTradeCd() + "Service");
+        serviceImpl.setImplementSet(implementSet);
+
+        List<Field> fieldList = new ArrayList<>();
+        Field field = new Field();
+        field.setVisibility("private");
+        field.setStatic(true);
+        field.setFinal(true);
+        field.setType("Log");
+        field.setName("logger");
+        field.setValue("LogFactory.getLog(" + tradeInfo.getTradeCd() + "ServiceImpl.class)");
+        fieldList.add(field);
+        serviceImpl.setStaticFieldList(fieldList);
+
+        List<Method> methodList = new ArrayList<>();
+        Method method = new Method();
+        List<Annotation> methodAnnotationList = new ArrayList<>();
+        Annotation methodAnnotation = new Annotation();
+        methodAnnotation.setName("Override");
+        methodAnnotationList.add(methodAnnotation);
+        method.setAnnotationList(methodAnnotationList);
+        method.setVisibility("public");
+        method.setReturnType(tradeInfo.getTradeCd() + "OutVo");
+        method.setName("doService");
+        List<Param> paramList = new ArrayList<>();
+        Param param = new Param();
+        param.setType("TxRequestMsg");
+        param.setName("txRequestMsg");
+        paramList.add(param);
+        method.setParamList(paramList);
+        method.setContent(
+                Indents.method("logger.info(\"--->>> call " + tradeInfo.getTradeCd() + "ServiceImpl.doService()\");", 1) +
+                Indents.method(tradeInfo.getTradeCd() + "InVo inVo = (" + tradeInfo.getTradeCd() + "InVo) txRequestMsg.getMsgBody().getMsgBodyEntity();", 1) +
+                Indents.method("// TODO your business code here", 1) +
+                Indents.method("", 1)
+        );
+        methodList.add(method);
+        serviceImpl.setMethodList(methodList);
+
+        tradeInfo.setServiceImpl(serviceImpl);
     }
 }
