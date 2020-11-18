@@ -32,7 +32,6 @@ import #(imp);
     #end
     #end
     #(method.getReturnType()) #(method.getName())(#for(param : method.getParamList())#if(!for.last)#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName()), #else#if(param.getAnnotation())@#(param.getAnnotation().getName())#if(param.getAnnotation().getDefaultValue())("#(param.getAnnotation().getDefaultValue())")#end  #end #(param.getType()) #(param.getName())#end#end);
-
 #end
 #for(method : interface.getDefaultMethodList())
 
