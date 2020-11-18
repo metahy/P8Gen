@@ -39,6 +39,10 @@ public class FileUtils {
     }
 
     public static void delete(File file) {
-        file.deleteOnExit();
+        try {
+            org.apache.commons.io.FileUtils.deleteDirectory(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
