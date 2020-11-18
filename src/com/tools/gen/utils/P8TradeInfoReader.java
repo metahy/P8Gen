@@ -250,7 +250,7 @@ public class P8TradeInfoReader {
 
                 Field field;
                 if (!"Group".equals(ss[4])) {
-                    field = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                    field = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 }
                 // class's class field
                 else {
@@ -290,8 +290,8 @@ public class P8TradeInfoReader {
                 if (fieldLists.size() > 0) {
                     for (Field forField : fieldLists) {
                         if (forField.getName().equals(CamelCaseUtils.toSmallCamelCase(ss[0]))) {
-                            if (!forField.getType().equals("C".equals(ss[4]) ? "String" : "BegDecimal")) {
-                                Logger.warn("Field [" + forField.getName() + "] type diff [" + forField.getType() + ", " + ("C".equals(ss[4]) ? "String" : "BegDecimal") + "], will use the one who was first defined.");
+                            if (!forField.getType().equals("C".equals(ss[4]) ? "String" : "BigDecimal")) {
+                                Logger.warn("Field [" + forField.getName() + "] type diff [" + forField.getType() + ", " + ("C".equals(ss[4]) ? "String" : "BigDecimal") + "], will use the one who was first defined.");
                             }
                             continue A;
                         }
@@ -301,7 +301,7 @@ public class P8TradeInfoReader {
                 if ("N".equals(ss[4])) {
                     importSet.add("java.math.BigDecimal");
                 }
-                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
                 methodList.addAll(genGetterAndSetter(innerField));
             }
@@ -323,7 +323,7 @@ public class P8TradeInfoReader {
                 if ("N".equals(ss[4])) {
                     importSet.add("java.math.BigDecimal");
                 }
-                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BegDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
                 methodList.addAll(genGetterAndSetter(innerField));
             }
