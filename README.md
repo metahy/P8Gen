@@ -79,6 +79,7 @@
 - [x] service implement
 - [ ] data transform xml
 - [x] other class in inVo or outVo
+- [ ] data transform template
 
 > About GenUtils
 - [x] use strategy pattern
