@@ -1,1 +1,27 @@
-<?xml>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mappings>
+    <mapping id="#(trade.getTradeCd())-request" auto="true" parser="xml2BeanParser" transformer="xml2BeanTransformer" extends="abstract_in_request_msg">
+        <structure node-name="ENTITY" field="msgBodyEntity" type="#(trade.getOutVo().getPkg()).#(trade.getTradeCd())InVo" override="abstract-in-request-entity">
+
+        </structure>
+    </mapping>
+    <segment id="#(trade.getOutVo().getPkg()).#(trade.getTradeCd())OutVo-entity">
+        <template>
+            <![CDATA[
+            <ENTITY>
+
+            </ENTITY>]]>
+        </template>
+    </segment>
+    <mapping id="#(trade.getTradeCd())-response" parser="bean2TextParser" transformer="bean2TextTransformer">
+        <include segment-id="transaction"/>
+        <include segment-id="in-response-header"/>
+        <include segment-id="transaction-body"/>
+        <include segment-id="in-response-content-common"/>
+        <include segment-id="#(trade.getOutVo().getPkg()).#(trade.getTradeCd())OutVo-entity"/>
+        <include segment-id="/transaction-body"/>
+        <include segment-id="response-emb"/>
+        <include segment-id="/transaction"/>
+    </mapping>
+</mappings>
