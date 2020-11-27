@@ -38,7 +38,6 @@ public class DataTransformGenStrategy extends GenStrategy<Map<String, Object>> {
         List<String> basicInfoLines = P8TradeInfoReader.getBasicInfoLines(lines);
         // deal trade basic info
         String tradeCd = basicInfoLines.get(0);
-        String tradeName = basicInfoLines.get(1);
 
         List<String> inVoLines = P8TradeInfoReader.getInVoLines(lines);
 
