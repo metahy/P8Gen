@@ -85,7 +85,7 @@ public class P8TradeInfoReader {
         return lines;
     }
 
-    private static List<String> getBasicInfoLines(List<String> lines) {
+    public static List<String> getBasicInfoLines(List<String> lines) {
         List<String> basicInfoLines = new ArrayList<>();
 
         basicInfoLines.add(lines.get(0));
