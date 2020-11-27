@@ -80,7 +80,7 @@
 - [x] data transform xml
 - [x] other class in inVo or outVo
 - [x] data transform template
-- [ ] Group support multi(only support *N Group now)
+- [ ] Group support single(only support *N Group now)
 
 > About GenUtils
 - [x] use strategy pattern
