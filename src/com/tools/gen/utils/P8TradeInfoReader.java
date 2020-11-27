@@ -96,7 +96,7 @@ public class P8TradeInfoReader {
         return basicInfoLines;
     }
 
-    private static List<String> getInVoLines(List<String> lines) {
+    public static List<String> getInVoLines(List<String> lines) {
         List<String> inVoLines = new ArrayList<>();
 
         for (int i = lines.indexOf("---") + 1; i < lines.lastIndexOf("---"); i++) {
@@ -108,7 +108,7 @@ public class P8TradeInfoReader {
         return inVoLines;
     }
 
-    private static List<String> getOutVoLines(List<String> lines) {
+    public static List<String> getOutVoLines(List<String> lines) {
         List<String> outVoLines = new ArrayList<>();
 
         for (int i = lines.lastIndexOf("---") + 1; i < lines.size(); i++) {
@@ -188,14 +188,14 @@ public class P8TradeInfoReader {
         tradeInfo.setOutVo(outVo);
     }
 
-    private static List<List<String>> getFieldLinesListAndImportSet(List<String> lines, Set<String> importSet) {
+    public static List<List<String>> getFieldLinesListAndImportSet(List<String> lines, Set<String> importSet) {
         List<List<String>> fieldLinesList = new ArrayList<>();
         List<String> fieldsLine = null;
         if (lines.size() > 0) {
             for (String line : lines) {
                 String[] ss = line.split("\t");
                 if ("Group".equals(ss[4])) {
-                    importSet.add("java.util.List");
+                    if (importSet != null) importSet.add("java.util.List");
                     fieldsLine = new ArrayList<>();
                     fieldsLine.add(line);
                 } else if (ss[0].startsWith("..")) {
@@ -209,7 +209,7 @@ public class P8TradeInfoReader {
                     fieldsLine = new ArrayList<>();
                     fieldsLine.add(line);
                     if ("N".equals(ss[4])) {
-                        importSet.add("java.math.BigDecimal");
+                        if (importSet != null) importSet.add("java.math.BigDecimal");
                     }
                     fieldLinesList.add(fieldsLine);
                     fieldsLine = null;
@@ -232,7 +232,6 @@ public class P8TradeInfoReader {
         // deal field lines list
         if (fieldLinesList.size() > 0) {
             for (List<String> fieldLines : fieldLinesList) {
-                // class's String/BigDecimal field
                 String[] ss = fieldLines.get(0).split("\t");
 
                 // check if exist
@@ -249,13 +248,14 @@ public class P8TradeInfoReader {
                 }
 
                 Field field;
+                // class's String/BigDecimal field
                 if (!"Group".equals(ss[4])) {
                     field = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 }
                 // class's class field
                 else {
                     String fieldClassName = CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4));
-                    field = new Field().setVisibility("private").setType("List<" + fieldClassName + ">").setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1));
+                    field = new Field().setVisibility("private").setType("List<" + fieldClassName + ">").setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1) + "List");
                     genGrpList(tradeInfo, field, fieldLines);
                 }
                 fieldLists.add(field);
