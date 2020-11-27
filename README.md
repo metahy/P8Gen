@@ -72,14 +72,15 @@
 - [x] method default return type - void
 
 > About trade
-- [ ] trade reader
+- [x] trade reader
 - [x] inVo
 - [x] outVo
 - [x] service
 - [x] service implement
-- [ ] data transform xml
+- [x] data transform xml
 - [x] other class in inVo or outVo
-- [ ] data transform template
+- [x] data transform template
+- [ ] Group support multi(only support *N Group now)
 
 > About GenUtils
 - [x] use strategy pattern
