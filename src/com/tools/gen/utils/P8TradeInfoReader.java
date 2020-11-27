@@ -266,6 +266,9 @@ public class P8TradeInfoReader {
 
     private static void genGrpList(P8TradeInfo tradeInfo, Field field, List<String> fieldLines) {
         String targetClazzName = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
+        if (field.getName().endsWith("List")) {
+            targetClazzName = targetClazzName.substring(0, targetClazzName.length() - 4);
+        }
         Clazz clazz = null;
         if (tradeInfo.getGrpList().size() > 0) {
             for (Clazz forClazz : tradeInfo.getGrpList()) {
@@ -311,7 +314,7 @@ public class P8TradeInfoReader {
             Set<String> importSet = new TreeSet<>();
 
             clazz.setVisibility("public");
-            clazz.setName(field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+            clazz.setName(targetClazzName);
 
             List<Field> fieldLists = new ArrayList<>();
             List<Method> methodList = new ArrayList<>();
@@ -400,7 +403,7 @@ public class P8TradeInfoReader {
         serviceImpl.setPkg(Main.basePackage + ".business.service.impl");
 
         Set<String> importSet = new TreeSet<>();
-        importSet.add("org.springframework.stereotype.Component");
+        importSet.add("org.springframework.stereotype.Service");
         importSet.add(Main.basePackage + ".business.service." + tradeInfo.getTradeCd() + "Service");
         importSet.add(Main.basePackage + ".business.vo." + tradeInfo.getTradeCd() + "InVo");
         importSet.add(Main.basePackage + ".business.vo." + tradeInfo.getTradeCd() + "OutVo");
@@ -409,9 +412,11 @@ public class P8TradeInfoReader {
         importSet.add("com.ccb.openframework.log.LogFactory");
         serviceImpl.setImportSet(importSet);
 
+        serviceImpl.setNote(NoteUtils.multiLine(Collections.singletonList(tradeInfo.getTradeName()), 0));
+
         List<Annotation> annotationList = new ArrayList<>();
         Annotation annotation = new Annotation();
-        annotation.setName("Component");
+        annotation.setName("Service");
         annotation.setDefaultValue(tradeInfo.getTradeCd().substring(0, 1).toLowerCase() + tradeInfo.getTradeCd().substring(1) + "ServiceImpl");
         annotationList.add(annotation);
         serviceImpl.setAnnotationList(annotationList);
@@ -453,8 +458,10 @@ public class P8TradeInfoReader {
         method.setContent(
                 Indents.method("logger.info(\"--->>> call " + tradeInfo.getTradeCd() + "ServiceImpl.doService()\");", 1) +
                 Indents.method(tradeInfo.getTradeCd() + "InVo inVo = (" + tradeInfo.getTradeCd() + "InVo) txRequestMsg.getMsgBody().getMsgBodyEntity();", 1) +
+                Indents.method(tradeInfo.getTradeCd() + "OutVo outVo = new " + tradeInfo.getTradeCd() + "OutVo();", 1) +
                 Indents.method("// TODO your business code here", 1) +
-                Indents.method("", 1)
+                Indents.method("", 1) +
+                Indents.method("return outVo", 1)
         );
         methodList.add(method);
         serviceImpl.setMethodList(methodList);
