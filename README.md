@@ -5,8 +5,9 @@
 ![License MIT](https://img.shields.io/badge/license-MIT-blue)
 ![GitHub repo size](https://img.shields.io/github/repo-size/hiramjoyce/P8Gen)
 
+![JDK](https://img.shields.io/badge/JDK-1.8+-green)
 ![Enjoy Template Engine](https://img.shields.io/badge/Enjoy_Template_Engine-4.9.02-green)
-![Enjoy Template Engine](https://img.shields.io/badge/commons_io-2.5-green)
+![commons io](https://img.shields.io/badge/commons_io-2.5-green)
 
 `P8Gen` is a code generator.
 
