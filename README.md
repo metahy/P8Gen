@@ -98,7 +98,7 @@ public class A0541T160ServiceImpl implements A0541T160Service {
         A0541T160OutVo outVo = new A0541T160OutVo();
         // TODO your business code here
         
-        return outVo
+        return outVo;
     }
 
 }
