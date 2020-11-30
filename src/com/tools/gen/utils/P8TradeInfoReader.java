@@ -461,7 +461,7 @@ public class P8TradeInfoReader {
                 Indents.method(tradeInfo.getTradeCd() + "OutVo outVo = new " + tradeInfo.getTradeCd() + "OutVo();", 1) +
                 Indents.method("// TODO your business code here", 1) +
                 Indents.method("", 1) +
-                Indents.method("return outVo", 1)
+                Indents.method("return outVo;", 1)
         );
         methodList.add(method);
         serviceImpl.setMethodList(methodList);
