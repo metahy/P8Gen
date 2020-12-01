@@ -27,11 +27,9 @@ Download the source code and import it into IDEA or Eclipse as a normal Java pro
 2. 找到Main.java，修改basePackage[生成的代码将以此包路径为根路径]和fileName[上一步配置好的文件]这两个属性
 3. 运行Main.java的main方法
 
-
-
-1. Refer to the p8Tradeinfo.txt file in the Resources directory, create a new file, and configure the properties of the transaction to be generated
-2. Find main.java and change the basePackage(the generated code will be rooted from this package path) and fileName(the file configured in the previous step) properties
-3. Run the main() method in Main.java
+- a. Refer to the p8Tradeinfo.txt file in the Resources directory, create a new file, and configure the properties of the transaction to be generated
+- b. Find main.java and change the basePackage(the generated code will be rooted from this package path) and fileName(the file configured in the previous step) properties
+- c. Run the main() method in Main.java
 
 ## 举例🌰 Example
 
