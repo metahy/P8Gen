@@ -17,6 +17,7 @@
 ## 安装 Install
 
 下载源码，作为普通java项目导入到IDEA或者Eclipse中
+
 Download the source code and import it into IDEA or Eclipse as a normal Java project
 
 
@@ -25,6 +26,7 @@ Download the source code and import it into IDEA or Eclipse as a normal Java pro
 1. 参考resources目录中P8TradeInfo.txt文件，新建一个文件，配置好要生成的交易相关的属性
 2. 找到Main.java，修改basePackage[生成的代码将以此包路径为根路径]和fileName[上一步配置好的文件]这两个属性
 3. 运行Main.java的main方法
+
 
 
 1. Refer to the p8Tradeinfo.txt file in the Resources directory, create a new file, and configure the properties of the transaction to be generated
