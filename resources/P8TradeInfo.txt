@@ -14,7 +14,7 @@ BYBK_TRM	回购期限	103348		N
 StrUsInd	启用标志	128683	1	C
 BYBK_TRM	回购期限	103348		N
 TXN_VRTY_ECD	交易品种编码	120958		C
-TEST_ABC_GRP	测试		1	Group
+TEST_ABC_GRP	测试			Group
 ..LTST_PRC	最新价格	103549		N
 ..TT_PRC	最新价格	103549		N
 TEST_CBA			1	Group
