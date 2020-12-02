@@ -88,7 +88,7 @@ public class DataTransformGenStrategy extends GenStrategy<Map<String, Object>> {
                 }
             }
             // class's class field
-            else {
+            else if ("*N".equals(ss[3]) || "".equals(ss[3])) {
                 String fieldClassName = CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4));
                 outVoSb.append(Indents.with(4)).append("<#list ").append(tradeCd).append("_outData.").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append("List! as ").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append(">").append("\n");
                 outVoSb.append(Indents.with(5)).append("<").append(ss[0]).append(" type=\"G\">").append("\n");
@@ -97,10 +97,22 @@ public class DataTransformGenStrategy extends GenStrategy<Map<String, Object>> {
                     if ("C".equals(ss2[4])) {
                         outVoSb.append(Indents.with(6)).append("<").append(ss2[0].substring(2)).append("><![CDATA[${(").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append(".").append(CamelCaseUtils.toSmallCamelCase(ss2[0])).append(")!}]${\"]>\"}</").append(ss2[0].substring(2)).append(">").append("\n");
                     } else {
-                        outVoSb.append(Indents.with(6)).append("<#setting number_format=\"0.########\"><").append(ss2[0].substring(2)).append("><![CDATA[${(").append(tradeCd).append("_outData.").append(CamelCaseUtils.toSmallCamelCase(ss2[0])).append(")!}]${\"]>\"}</").append(ss2[0].substring(2)).append(">").append("\n");
+                        outVoSb.append(Indents.with(6)).append("<#setting number_format=\"0.########\"><").append(ss2[0].substring(2)).append("><![CDATA[${(").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append(".").append(CamelCaseUtils.toSmallCamelCase(ss2[0])).append(")!}]${\"]>\"}</").append(ss2[0].substring(2)).append(">").append("\n");
                     }
                 }
                 outVoSb.append(Indents.with(5)).append("<").append(ss[0]).append(">").append("\n").append(Indents.with(4)).append("</#list>").append("\n");
+            } else {
+                String fieldClassName = ss[0].endsWith("_GRP") || ss[0].endsWith("_Grp") ? CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4)) : CamelCaseUtils.toBigCamelCase(ss[0]);
+                outVoSb.append(Indents.with(4)).append("<").append(ss[0]).append(">").append("\n");
+                for (int i = 1; i < fieldLines.size(); i++) {
+                    String[] ss2 = fieldLines.get(i).split("\t");
+                    if ("C".equals(ss2[4])) {
+                        outVoSb.append(Indents.with(5)).append("<").append(ss2[0].substring(2)).append("><![CDATA[${(").append(tradeCd).append("_outData.").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append(".").append(CamelCaseUtils.toSmallCamelCase(ss2[0])).append(")!}]${\"]>\"}</").append(ss2[0].substring(2)).append(">").append("\n");
+                    } else {
+                        outVoSb.append(Indents.with(5)).append("<#setting number_format=\"0.########\"><").append(ss2[0].substring(2)).append("><![CDATA[${(").append(tradeCd).append("_outData.").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append(".").append(CamelCaseUtils.toSmallCamelCase(ss2[0])).append(")!}]${\"]>\"}</").append(ss2[0].substring(2)).append(">").append("\n");
+                    }
+                }
+                outVoSb.append(Indents.with(4)).append("<").append(ss[0]).append(">").append("\n");
             }
         }
 
