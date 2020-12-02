@@ -195,7 +195,12 @@ public class P8TradeInfoReader {
             for (String line : lines) {
                 String[] ss = line.split("\t");
                 if ("Group".equals(ss[4])) {
-                    if (importSet != null) importSet.add("java.util.List");
+                    if (fieldsLine != null) {
+                        fieldLinesList.add(fieldsLine);
+                    }
+                    if ("*N".equals(ss[3]) || "".equals(ss[3])) {
+                        if (importSet != null) importSet.add("java.util.List");
+                    }
                     fieldsLine = new ArrayList<>();
                     fieldsLine.add(line);
                 } else if (ss[0].startsWith("..")) {
@@ -253,9 +258,13 @@ public class P8TradeInfoReader {
                     field = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 }
                 // class's class field
-                else {
+                else if ("*N".equals(ss[3]) || "".equals(ss[3])) {
                     String fieldClassName = CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4));
                     field = new Field().setVisibility("private").setType("List<" + fieldClassName + ">").setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1) + "List");
+                    genGrpList(tradeInfo, field, fieldLines);
+                } else {
+                    String fieldClassName = ss[0].endsWith("_GRP") || ss[0].endsWith("_Grp") ? CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4)) : CamelCaseUtils.toBigCamelCase(ss[0]);
+                    field = new Field().setVisibility("private").setType(fieldClassName).setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1));
                     genGrpList(tradeInfo, field, fieldLines);
                 }
                 fieldLists.add(field);
