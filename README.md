@@ -296,7 +296,7 @@ public class A0541T160OutVo implements Serializable, TxResponseMsgBodyEntity {
 - [x] data transform xml
 - [x] other class in inVo or outVo
 - [x] data transform template
-- [ ] Group support single(only support *N Group now)
+- [x] Group support single
 
 > About GenUtils
 
