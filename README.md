@@ -31,6 +31,7 @@ Download the source code and import it into IDEA or Eclipse as a normal Java pro
 - b. Find main.java and change the basePackage(the generated code will be rooted from this package path) and fileName(the file configured in the previous step) properties
 - c. Run the main() method in Main.java
 
+
 ## 举例🌰 Example
 
 编辑 P8TradeInfo.txt 如下：
@@ -39,28 +40,28 @@ Edit P8TradeInfo.txt like this:
 
 - P8TradeInfo.txt
 ```txt
-A0541T160
-现券价格同步服务
+A0000T000
+测试服务
 ---
-TXN_VRTY_ECD	交易品种编码	120958		C
-TXN_VRTY_ECD1	交易品种编码	120958		N
-PLDTP_BYBK_OFR1_GRP			1	Group
-..MDL_DT	成交日期	102830		C
-..MDL_TM	成交时间	103549		N
-PLDTP_BYBK_OFR2_GRP	注释		*N	Group
-..WAIR	加权平均利率	103563		N
-..LTST_INTRT	最新利率	103618		C
-BYBK_TRM	回购期限	103348		N
+FIELD_ABC_UVW	属性1	123456		C
+FIELD_ABC_XYZ	属性2	654321		N
+GROUP_FIELD1_GRP			1	Group
+..INNER_FIELD1	内部属性1	234567		C
+..INNER_FIELD2	内部属性2	765432		N
+GROUP_FIELD2_GRP	注释		*N	Group
+..INNER_FIELD3	内部属性3	345678		N
+..INNER_FIELD4	内部属性4	876543		C
+FIELD_ABC_OMN	属性3	012345		N
 ---
-StrUsInd	启用标志	128683	1	C
-BYBK_TRM	回购期限	103348		N
-TXN_VRTY_ECD	交易品种编码	120958		C
-TEST_ABC_GRP	测试			Group
-..LTST_PRC	最新价格	103549		N
-..TT_PRC	最新价格	103549		N
-TEST_CBA			1	Group
-..MDL_DT	成交日期	102830		C
-..MDL_PRC	成交价格	103549		N
+FIELD_ABC_DEF	属性4	456789	1	C
+FIELD_ABC_GHI	属性5	987654		N
+GROUP_FIELD2_GRP	注释		1	Group
+..INNER_FIELD3	内部属性3	345678		N
+..INNER_FIELD4	内部属性4	876543		C
+FIELD_ABC_JKL	属性6	678901		C
+GROUP_FIELD3_GRP			*N	Group
+..INNER_FIELD5	内部属性5	567890		C
+..INNER_FIELD6	内部属性6	098765		N
 ```
 
 生成的Java代码和xml如下：
@@ -69,42 +70,42 @@ The result of the generator would be like this:
 
 - A0541T160Service.java
 ```java
-package com.ccb.fpp.cmds.business.service;
+package com.hiram.test.base.business.service;
 
-import com.ccb.fpp.cmds.business.vo.A0541T160OutVo;
-import com.ccb.openframework.datatransform.message.TxRequestMsg;
+import com.[WARN].openframework.datatransform.message.TxRequestMsg;
+import com.hiram.test.base.business.vo.A0000T000OutVo;
 
-public interface A0541T160Service {
+public interface A0000T000Service {
 
-    A0541T160OutVo doService(TxRequestMsg txRequestMsg);
+    A0000T000OutVo doService(TxRequestMsg txRequestMsg);
 
 }
 ```
 
-- A0541T160ServiceImpl.java
+- A0000T000ServiceImpl.java
 ```java
-package com.ccb.fpp.cmds.business.service.impl;
+package com.hiram.test.base.business.service.impl;
 
-import com.ccb.fpp.cmds.business.service.A0541T160Service;
-import com.ccb.fpp.cmds.business.vo.A0541T160InVo;
-import com.ccb.fpp.cmds.business.vo.A0541T160OutVo;
-import com.ccb.openframework.datatransform.message.TxRequestMsg;
-import com.ccb.openframework.log.Log;
-import com.ccb.openframework.log.LogFactory;
+import com.[WARN].openframework.datatransform.message.TxRequestMsg;
+import com.[WARN].openframework.log.Log;
+import com.[WARN].openframework.log.LogFactory;
+import com.hiram.test.base.business.service.A0000T000Service;
+import com.hiram.test.base.business.vo.A0000T000InVo;
+import com.hiram.test.base.business.vo.A0000T000OutVo;
 import org.springframework.stereotype.Service;
 
 /**
- * 现券价格同步服务
+ * 测试服务
  */
-@Service("a0541T160ServiceImpl")
-public class A0541T160ServiceImpl implements A0541T160Service {
-    private static final Log logger = LogFactory.getLog(A0541T160ServiceImpl.class);
+@Service("a0000T000ServiceImpl")
+public class A0000T000ServiceImpl implements A0000T000Service {
+    private static final Log logger = LogFactory.getLog(A0000T000ServiceImpl.class);
 
     @Override
-    public A0541T160OutVo doService(TxRequestMsg txRequestMsg) {
-        logger.info("--->>> call A0541T160ServiceImpl.doService()");
-        A0541T160InVo inVo = (A0541T160InVo) txRequestMsg.getMsgBody().getMsgBodyEntity();
-        A0541T160OutVo outVo = new A0541T160OutVo();
+    public A0000T000OutVo doService(TxRequestMsg txRequestMsg) {
+        logger.info("--->>> call A0000T000ServiceImpl.doService()");
+        A0000T000InVo inVo = (A0000T000InVo) txRequestMsg.getMsgBody().getMsgBodyEntity();
+        A0000T000OutVo outVo = new A0000T000OutVo();
         // TODO your business code here
         
         return outVo;
@@ -113,323 +114,314 @@ public class A0541T160ServiceImpl implements A0541T160Service {
 }
 ```
 
-- A0541T160InVo.java
+- A0000T000InVo.java
 ```java
-package com.ccb.fpp.cmds.business.vo;
+package com.hiram.test.base.business.vo;
 
-import com.ccb.openframework.datatransform.message.TxRequestMsgBodyEntity;
+import com.[WARN].openframework.datatransform.message.TxRequestMsgBodyEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class A0541T160InVo implements Serializable, TxRequestMsgBodyEntity {
+public class A0000T000InVo implements Serializable, TxRequestMsgBodyEntity {
     private static final long serialVersionUID = 1L;
 
-    // 交易品种编码
-    private String txnVrtyEcd;
+    // 属性1
+    private String fieldAbcUvw;
 
-    // 交易品种编码
-    private BigDecimal txnVrtyEcd1;
+    // 属性2
+    private BigDecimal fieldAbcXyz;
 
-    private PldtpBybkOfr1 pldtpBybkOfr1;
+    private GroupField1 groupField1;
 
     // 注释
-    private List<PldtpBybkOfr2> pldtpBybkOfr2List;
+    private List<GroupField2> groupField2List;
 
-    // 回购期限
-    private BigDecimal bybkTrm;
+    // 属性3
+    private BigDecimal fieldAbcOmn;
 
-    public void setTxnVrtyEcd(String txnVrtyEcd) {
-        this.txnVrtyEcd = txnVrtyEcd;
+    public void setFieldAbcUvw(String fieldAbcUvw) {
+        this.fieldAbcUvw = fieldAbcUvw;
     }
 
-    public String getTxnVrtyEcd() {
-        return txnVrtyEcd;
+    public String getFieldAbcUvw() {
+        return fieldAbcUvw;
     }
 
-    public void setTxnVrtyEcd1(BigDecimal txnVrtyEcd1) {
-        this.txnVrtyEcd1 = txnVrtyEcd1;
+    public void setFieldAbcXyz(BigDecimal fieldAbcXyz) {
+        this.fieldAbcXyz = fieldAbcXyz;
     }
 
-    public BigDecimal getTxnVrtyEcd1() {
-        return txnVrtyEcd1;
+    public BigDecimal getFieldAbcXyz() {
+        return fieldAbcXyz;
     }
 
-    public void setPldtpBybkOfr1(PldtpBybkOfr1 pldtpBybkOfr1) {
-        this.pldtpBybkOfr1 = pldtpBybkOfr1;
+    public void setGroupField1(GroupField1 groupField1) {
+        this.groupField1 = groupField1;
     }
 
-    public PldtpBybkOfr1 getPldtpBybkOfr1() {
-        return pldtpBybkOfr1;
+    public GroupField1 getGroupField1() {
+        return groupField1;
     }
 
-    public void setPldtpBybkOfr2List(List<PldtpBybkOfr2> pldtpBybkOfr2List) {
-        this.pldtpBybkOfr2List = pldtpBybkOfr2List;
+    public void setGroupField2List(List<GroupField2> groupField2List) {
+        this.groupField2List = groupField2List;
     }
 
-    public List<PldtpBybkOfr2> getPldtpBybkOfr2List() {
-        return pldtpBybkOfr2List;
+    public List<GroupField2> getGroupField2List() {
+        return groupField2List;
     }
 
-    public void setBybkTrm(BigDecimal bybkTrm) {
-        this.bybkTrm = bybkTrm;
+    public void setFieldAbcOmn(BigDecimal fieldAbcOmn) {
+        this.fieldAbcOmn = fieldAbcOmn;
     }
 
-    public BigDecimal getBybkTrm() {
-        return bybkTrm;
+    public BigDecimal getFieldAbcOmn() {
+        return fieldAbcOmn;
     }
 
 }
 ```
 
-- A0541T160OutVo.java
+- A0000T000OutVo.java
 ```java
-package com.ccb.fpp.cmds.business.vo;
+package com.hiram.test.base.business.vo;
 
-import com.ccb.openframework.datatransform.message.TxResponseMsgBodyEntity;
+import com.[WARN].openframework.datatransform.message.TxResponseMsgBodyEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class A0541T160OutVo implements Serializable, TxResponseMsgBodyEntity {
+public class A0000T000OutVo implements Serializable, TxResponseMsgBodyEntity {
     private static final long serialVersionUID = 1L;
 
-    // 启用标志
-    private String strusind;
+    // 属性4
+    private String fieldAbcDef;
 
-    // 回购期限
-    private BigDecimal bybkTrm;
+    // 属性5
+    private BigDecimal fieldAbcGhi;
 
-    // 交易品种编码
-    private String txnVrtyEcd;
+    // 注释
+    private GroupField2 groupField2;
 
-    // 测试
-    private List<TestAbc> testAbcList;
+    // 属性6
+    private String fieldAbcJkl;
 
-    private TestCba testCba;
+    private List<GroupField3> groupField3List;
 
-    public void setStrusind(String strusind) {
-        this.strusind = strusind;
+    public void setFieldAbcDef(String fieldAbcDef) {
+        this.fieldAbcDef = fieldAbcDef;
     }
 
-    public String getStrusind() {
-        return strusind;
+    public String getFieldAbcDef() {
+        return fieldAbcDef;
     }
 
-    public void setBybkTrm(BigDecimal bybkTrm) {
-        this.bybkTrm = bybkTrm;
+    public void setFieldAbcGhi(BigDecimal fieldAbcGhi) {
+        this.fieldAbcGhi = fieldAbcGhi;
     }
 
-    public BigDecimal getBybkTrm() {
-        return bybkTrm;
+    public BigDecimal getFieldAbcGhi() {
+        return fieldAbcGhi;
     }
 
-    public void setTxnVrtyEcd(String txnVrtyEcd) {
-        this.txnVrtyEcd = txnVrtyEcd;
+    public void setGroupField2(GroupField2 groupField2) {
+        this.groupField2 = groupField2;
     }
 
-    public String getTxnVrtyEcd() {
-        return txnVrtyEcd;
+    public GroupField2 getGroupField2() {
+        return groupField2;
     }
 
-    public void setTestAbcList(List<TestAbc> testAbcList) {
-        this.testAbcList = testAbcList;
+    public void setFieldAbcJkl(String fieldAbcJkl) {
+        this.fieldAbcJkl = fieldAbcJkl;
     }
 
-    public List<TestAbc> getTestAbcList() {
-        return testAbcList;
+    public String getFieldAbcJkl() {
+        return fieldAbcJkl;
     }
 
-    public void setTestCba(TestCba testCba) {
-        this.testCba = testCba;
+    public void setGroupField3List(List<GroupField3> groupField3List) {
+        this.groupField3List = groupField3List;
     }
 
-    public TestCba getTestCba() {
-        return testCba;
+    public List<GroupField3> getGroupField3List() {
+        return groupField3List;
     }
 
 }
 ```
 
-- PldtpBybkOfr1.java
+- GroupField1.java
 ```java
-package com.ccb.fpp.cmds.business.vo;
+package com.hiram.test.base.business.vo;
 
 import java.math.BigDecimal;
 
-public class PldtpBybkOfr1 {
+public class GroupField1 {
 
-    // 成交日期
-    private String mdlDt;
+    // 内部属性1
+    private String innerField1;
 
-    // 成交时间
-    private BigDecimal mdlTm;
+    // 内部属性2
+    private BigDecimal innerField2;
 
-    public void setMdlDt(String mdlDt) {
-        this.mdlDt = mdlDt;
+    public void setInnerField1(String innerField1) {
+        this.innerField1 = innerField1;
     }
 
-    public String getMdlDt() {
-        return mdlDt;
+    public String getInnerField1() {
+        return innerField1;
     }
 
-    public void setMdlTm(BigDecimal mdlTm) {
-        this.mdlTm = mdlTm;
+    public void setInnerField2(BigDecimal innerField2) {
+        this.innerField2 = innerField2;
     }
 
-    public BigDecimal getMdlTm() {
-        return mdlTm;
+    public BigDecimal getInnerField2() {
+        return innerField2;
     }
 
 }
 ```
 
-- PldtpBybkOfr2.java
+- GroupField2.java
 ```java
-package com.ccb.fpp.cmds.business.vo;
+package com.hiram.test.base.business.vo;
 
 import java.math.BigDecimal;
 
-public class PldtpBybkOfr2 {
+public class GroupField2 {
 
-    // 加权平均利率
-    private BigDecimal wair;
+    // 内部属性3
+    private BigDecimal innerField3;
 
-    // 最新利率
-    private String ltstIntrt;
+    // 内部属性4
+    private String innerField4;
 
-    public void setWair(BigDecimal wair) {
-        this.wair = wair;
+    // 内部属性7
+    private String innerField7;
+
+    // 内部属性8
+    private String innerField8;
+
+    public void setInnerField3(BigDecimal innerField3) {
+        this.innerField3 = innerField3;
     }
 
-    public BigDecimal getWair() {
-        return wair;
+    public BigDecimal getInnerField3() {
+        return innerField3;
     }
 
-    public void setLtstIntrt(String ltstIntrt) {
-        this.ltstIntrt = ltstIntrt;
+    public void setInnerField4(String innerField4) {
+        this.innerField4 = innerField4;
     }
 
-    public String getLtstIntrt() {
-        return ltstIntrt;
+    public String getInnerField4() {
+        return innerField4;
+    }
+
+    public void setInnerField7(String innerField7) {
+        this.innerField7 = innerField7;
+    }
+
+    public String getInnerField7() {
+        return innerField7;
+    }
+
+    public void setInnerField8(String innerField8) {
+        this.innerField8 = innerField8;
+    }
+
+    public String getInnerField8() {
+        return innerField8;
     }
 
 }
 ```
 
-- TestAbc.java
+- GroupField3.java
 ```java
-package com.ccb.fpp.cmds.business.vo;
+package com.hiram.test.base.business.vo;
 
 import java.math.BigDecimal;
 
-public class TestAbc {
+public class GroupField3 {
 
-    // 最新价格
-    private BigDecimal ltstPrc;
+    // 内部属性5
+    private String innerField5;
 
-    // 最新价格
-    private BigDecimal ttPrc;
+    // 内部属性6
+    private BigDecimal innerField6;
 
-    public void setLtstPrc(BigDecimal ltstPrc) {
-        this.ltstPrc = ltstPrc;
+    public void setInnerField5(String innerField5) {
+        this.innerField5 = innerField5;
     }
 
-    public BigDecimal getLtstPrc() {
-        return ltstPrc;
+    public String getInnerField5() {
+        return innerField5;
     }
 
-    public void setTtPrc(BigDecimal ttPrc) {
-        this.ttPrc = ttPrc;
+    public void setInnerField6(BigDecimal innerField6) {
+        this.innerField6 = innerField6;
     }
 
-    public BigDecimal getTtPrc() {
-        return ttPrc;
-    }
-
-}
-```
-
-- TestCba.java
-```java
-package com.ccb.fpp.cmds.business.vo;
-
-import java.math.BigDecimal;
-
-public class TestCba {
-
-    // 成交日期
-    private String mdlDt;
-
-    // 成交价格
-    private BigDecimal mdlPrc;
-
-    public void setMdlDt(String mdlDt) {
-        this.mdlDt = mdlDt;
-    }
-
-    public String getMdlDt() {
-        return mdlDt;
-    }
-
-    public void setMdlPrc(BigDecimal mdlPrc) {
-        this.mdlPrc = mdlPrc;
-    }
-
-    public BigDecimal getMdlPrc() {
-        return mdlPrc;
+    public BigDecimal getInnerField6() {
+        return innerField6;
     }
 
 }
 ```
 
-- A0541T160.xml
+- A0000T000.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <mappings>
-    <mapping id="A0541T160-request" auto="true" parser="xml2BeanParser" transformer="xml2BeanTransformer" extends="abstract_in_request_msg">
-        <structure node-name="ENTITY" field="msgBodyEntity" type="com.ccb.fpp.cmds.business.vo.A0541T160InVo" override="abstract-in-request-entity">
-            <value node-name="TXN_VRTY_ECD" field="txnVrtyEcd" type="java.lang.String"/>
-            <value node-name="TXN_VRTY_ECD1" field="txnVrtyEcd1" type="java.math.BigDecimal"/>
-            <structure node-name="PLDTP_BYBK_OFR1_GRP" field="pldtpBybkOfr1" type="com.ccb.fpp.cmds.business.vo.PldtpBybkOfr1" is-wrap="true">
-                <value node-name="MDL_DT" field="mdlDt" type="java.lang.String"/>
-                <value node-name="MDL_TM" field="mdlTm" type="java.math.BigDecimal"/>
+    <mapping id="A0000T000-request" auto="true" parser="xml2BeanParser" transformer="xml2BeanTransformer" extends="abstract_in_request_msg">
+        <structure node-name="ENTITY" field="msgBodyEntity" type="com.hiram.test.base.business.vo.A0000T000InVo" override="abstract-in-request-entity">
+            <value node-name="FIELD_ABC_UVW" field="fieldAbcUvw" type="java.lang.String"/>
+            <value node-name="FIELD_ABC_XYZ" field="fieldAbcXyz" type="java.math.BigDecimal"/>
+            <structure node-name="GROUP_FIELD1_GRP" field="groupField1" type="com.hiram.test.base.business.vo.GroupField1" is-wrap="true">
+                <value node-name="INNER_FIELD1" field="innerField1" type="java.lang.String"/>
+                <value node-name="INNER_FIELD2" field="innerField2" type="java.math.BigDecimal"/>
             </structure>
-            <collection node-name="PLDTP_BYBK_OFR2_GRP" field="pldtpBybkOfr2List" type="java.util.ArrayList" is-wrap="false">
-                <structure node-name="PLDTP_BYBK_OFR2_GRP" field="pldtpBybkOfr2List" type="com.ccb.fpp.cmds.business.vo.PldtpBybkOfr2" is-wrap="true">
-                    <value node-name="WAIR" field="wair" type="java.math.BigDecimal"/>
-                    <value node-name="LTST_INTRT" field="ltstIntrt" type="java.lang.String"/>
+            <collection node-name="GROUP_FIELD2_GRP" field="groupField2List" type="java.util.ArrayList" is-wrap="false">
+                <structure node-name="GROUP_FIELD2_GRP" field="groupField2List" type="com.hiram.test.base.business.vo.GroupField2" is-wrap="true">
+                    <value node-name="INNER_FIELD3" field="innerField3" type="java.math.BigDecimal"/>
+                    <value node-name="INNER_FIELD4" field="innerField4" type="java.lang.String"/>
+                    <value node-name="INNER_FIELD7" field="innerField7" type="java.lang.String"/>
                 </structure>
             </collection>
-            <value node-name="BYBK_TRM" field="bybkTrm" type="java.math.BigDecimal"/>
+            <value node-name="FIELD_ABC_OMN" field="fieldAbcOmn" type="java.math.BigDecimal"/>
         </structure>
     </mapping>
-    <segment id="com.ccb.fpp.cmds.business.vo.A0541T160OutVo-entity">
+    <segment id="com.hiram.test.base.business.vo.A0000T000OutVo-entity">
         <template>
             <![CDATA[<ENTITY>
-                <StrUsInd><![CDATA[${(A0541T160_outData.strusind)!}]${"]>"}</StrUsInd>
-                <#setting number_format="0.########"><BYBK_TRM><![CDATA[${(A0541T160_outData.bybkTrm)!}]${"]>"}</BYBK_TRM>
-                <TXN_VRTY_ECD><![CDATA[${(A0541T160_outData.txnVrtyEcd)!}]${"]>"}</TXN_VRTY_ECD>
-                <#list A0541T160_outData.testAbcList! as testAbc>
-                    <TEST_ABC_GRP type="G">
-                        <#setting number_format="0.########"><LTST_PRC><![CDATA[${(testAbc.ltstPrc)!}]${"]>"}</LTST_PRC>
-                        <#setting number_format="0.########"><TT_PRC><![CDATA[${(testAbc.ttPrc)!}]${"]>"}</TT_PRC>
-                    <TEST_ABC_GRP>
+                <FIELD_ABC_DEF><![CDATA[${(A0000T000_outData.fieldAbcDef)!}]${"]>"}</FIELD_ABC_DEF>
+                <#setting number_format="0.########"><FIELD_ABC_GHI><![CDATA[${(A0000T000_outData.fieldAbcGhi)!}]${"]>"}</FIELD_ABC_GHI>
+                <GROUP_FIELD2_GRP>
+                    <#setting number_format="0.########"><INNER_FIELD3><![CDATA[${(A0000T000_outData.groupField2.innerField3)!}]${"]>"}</INNER_FIELD3>
+                    <INNER_FIELD4><![CDATA[${(A0000T000_outData.groupField2.innerField4)!}]${"]>"}</INNER_FIELD4>
+                    <INNER_FIELD8><![CDATA[${(A0000T000_outData.groupField2.innerField8)!}]${"]>"}</INNER_FIELD8>
+                <GROUP_FIELD2_GRP>
+                <FIELD_ABC_JKL><![CDATA[${(A0000T000_outData.fieldAbcJkl)!}]${"]>"}</FIELD_ABC_JKL>
+                <#list A0000T000_outData.groupField3List! as groupField3>
+                    <GROUP_FIELD3_GRP type="G">
+                        <INNER_FIELD5><![CDATA[${(groupField3.innerField5)!}]${"]>"}</INNER_FIELD5>
+                        <#setting number_format="0.########"><INNER_FIELD6><![CDATA[${(groupField3.innerField6)!}]${"]>"}</INNER_FIELD6>
+                    <GROUP_FIELD3_GRP>
                 </#list>
-                <TEST_CBA>
-                    <MDL_DT><![CDATA[${(A0541T160_outData.testCba.mdlDt)!}]${"]>"}</MDL_DT>
-                    <#setting number_format="0.########"><MDL_PRC><![CDATA[${(A0541T160_outData.testCba.mdlPrc)!}]${"]>"}</MDL_PRC>
-                <TEST_CBA>
             </ENTITY>]]>
         </template>
     </segment>
-    <mapping id="A0541T160-response" parser="bean2TextParser" transformer="bean2TextTransformer">
+    <mapping id="A0000T000-response" parser="bean2TextParser" transformer="bean2TextTransformer">
         <include segment-id="transaction"/>
         <include segment-id="in-response-header"/>
         <include segment-id="transaction-body"/>
         <include segment-id="in-response-content-common"/>
-        <include segment-id="com.ccb.fpp.cmds.business.vo.A0541T160OutVo-entity"/>
+        <include segment-id="com.hiram.test.base.business.vo.A0000T000OutVo-entity"/>
         <include segment-id="/transaction-body"/>
         <include segment-id="response-emb"/>
         <include segment-id="/transaction"/>
