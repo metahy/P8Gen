@@ -51,7 +51,7 @@ public class DataTransformGenStrategy extends GenStrategy<Map<String, Object>> {
                 inVoSb.append(Indents.with(3)).append("<value node-name=\"").append(ss[0]).append("\" field=\"").append(CamelCaseUtils.toSmallCamelCase(ss[0])).append("\" type=\"").append("C".equals(ss[4]) ? "java.lang.String" : "java.math.BigDecimal").append("\"/>").append("\n");
             }
             // class's class field
-            else {
+            else if ("*N".equals(ss[3]) || "".equals(ss[3])) {
                 String fieldClassName = CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4));
                 inVoSb.append(Indents.with(3)).append("<collection node-name=\"").append(ss[0]).append("\" field=\"").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append("List").append("\" type=\"java.util.ArrayList\" is-wrap=\"false\">").append("\n");
                 inVoSb.append(Indents.with(4)).append("<structure node-name=\"").append(ss[0]).append("\" field=\"").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append("List").append("\" type=\"").append(Main.basePackage).append(".business.vo.").append(fieldClassName).append("\" is-wrap=\"true\">").append("\n");
@@ -60,6 +60,14 @@ public class DataTransformGenStrategy extends GenStrategy<Map<String, Object>> {
                     inVoSb.append(Indents.with(5)).append("<value node-name=\"").append(ss2[0].substring(2)).append("\" field=\"").append(CamelCaseUtils.toSmallCamelCase(ss2[0])).append("\" type=\"").append("C".equals(ss2[4]) ? "java.lang.String" : "java.math.BigDecimal").append("\"/>").append("\n");
                 }
                 inVoSb.append(Indents.with(4)).append("</structure>").append("\n").append(Indents.with(3)).append("</collection>").append("\n");
+            } else {
+                String fieldClassName = ss[0].endsWith("_GRP") || ss[0].endsWith("_Grp") ? CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4)) : CamelCaseUtils.toBigCamelCase(ss[0]);
+                inVoSb.append(Indents.with(3)).append("<structure node-name=\"").append(ss[0]).append("\" field=\"").append(fieldClassName.substring(0, 1).toLowerCase()).append(fieldClassName.substring(1)).append("\" type=\"").append(Main.basePackage).append(".business.vo.").append(fieldClassName).append("\" is-wrap=\"true\">").append("\n");
+                for (int i = 1; i < fieldLines.size(); i++) {
+                    String[] ss2 = fieldLines.get(i).split("\t");
+                    inVoSb.append(Indents.with(4)).append("<value node-name=\"").append(ss2[0].substring(2)).append("\" field=\"").append(CamelCaseUtils.toSmallCamelCase(ss2[0])).append("\" type=\"").append("C".equals(ss2[4]) ? "java.lang.String" : "java.math.BigDecimal").append("\"/>").append("\n");
+                }
+                inVoSb.append(Indents.with(3)).append("</structure>").append("\n");
             }
         }
 
