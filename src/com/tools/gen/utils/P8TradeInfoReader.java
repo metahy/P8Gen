@@ -255,16 +255,16 @@ public class P8TradeInfoReader {
                 Field field;
                 // class's String/BigDecimal field
                 if (!"Group".equals(ss[4])) {
-                    field = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                    field = new Field().setNote(StringUtils.isBlank(ss[1]) ? null : NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 }
                 // class's class field
                 else if ("*N".equals(ss[3]) || "".equals(ss[3])) {
                     String fieldClassName = CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4));
-                    field = new Field().setVisibility("private").setType("List<" + fieldClassName + ">").setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1) + "List");
+                    field = new Field().setNote(StringUtils.isBlank(ss[1]) ? null : NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("List<" + fieldClassName + ">").setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1) + "List");
                     genGrpList(tradeInfo, field, fieldLines);
                 } else {
                     String fieldClassName = ss[0].endsWith("_GRP") || ss[0].endsWith("_Grp") ? CamelCaseUtils.toBigCamelCase(ss[0].substring(0, ss[0].length() - 4)) : CamelCaseUtils.toBigCamelCase(ss[0]);
-                    field = new Field().setVisibility("private").setType(fieldClassName).setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1));
+                    field = new Field().setNote(StringUtils.isBlank(ss[1]) ? null : NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType(fieldClassName).setName(fieldClassName.substring(0, 1).toLowerCase() + fieldClassName.substring(1));
                     genGrpList(tradeInfo, field, fieldLines);
                 }
                 fieldLists.add(field);
@@ -313,7 +313,7 @@ public class P8TradeInfoReader {
                 if ("N".equals(ss[4])) {
                     importSet.add("java.math.BigDecimal");
                 }
-                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                innerField = new Field().setNote(StringUtils.isBlank(ss[1]) ? null : NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
                 methodList.addAll(genGetterAndSetter(innerField));
             }
@@ -335,7 +335,7 @@ public class P8TradeInfoReader {
                 if ("N".equals(ss[4])) {
                     importSet.add("java.math.BigDecimal");
                 }
-                innerField = new Field().setNote(NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
+                innerField = new Field().setNote(StringUtils.isBlank(ss[1]) ? null : NoteUtils.singleLine(ss[1], 1)).setVisibility("private").setType("C".equals(ss[4]) ? "String" : "BigDecimal").setName(CamelCaseUtils.toSmallCamelCase(ss[0]));
                 fieldLists.add(innerField);
                 methodList.addAll(genGetterAndSetter(innerField));
             }
