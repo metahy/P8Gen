@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class Main {
     // generate java code base package
-    public static final String basePackage = "com.ccb.fpp.cmds";
+    public static final String basePackage = "com.hiram.test.base";
     // trade source
     public static final String fileName = "P8TradeInfo.txt";
 
