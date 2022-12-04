@@ -3,7 +3,7 @@
 
 ![Build Passing](https://img.shields.io/badge/build-passing-brightgreen)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue)
-![GitHub repo size](https://img.shields.io/github/repo-size/hiramjoyce/P8Gen)
+![GitHub repo size](https://img.shields.io/github/repo-size/metahy/P8Gen)
 
 ![JDK](https://img.shields.io/badge/JDK-1.8+-green)
 ![Enjoy Template Engine](https://img.shields.io/badge/Enjoy_Template_Engine-4.9.02-green)
