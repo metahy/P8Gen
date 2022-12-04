@@ -68,7 +68,7 @@ GROUP_FIELD3_GRP			*N	Group
 
 The result of the generator would be like this:
 
-- A0541T160Service.java
+- A0000T000Service.java
 ```java
 package com.hiram.test.base.business.service;
 
